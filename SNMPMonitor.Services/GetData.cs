@@ -36,18 +36,18 @@ namespace SNMPMonitor.Services
             switch (version)
             {
                 case 1:
-                    equipment.Description = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.1.0", timeOut);
-                    equipment.Contact =  get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.4.0", timeOut);
-                    equipment.Name =get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.5.0", timeOut);
-                    equipment.Location = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.6.0", timeOut);
-                    equipment.UpTime= get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.3.0", timeOut);
+                    equipment.Description = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.1.0", timeOut).ToString();
+                    equipment.Contact =  get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.4.0", timeOut).ToString();
+                    equipment.Name =get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.5.0", timeOut).ToString();
+                    equipment.Location = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.6.0", timeOut).ToString();
+                    equipment.UpTime= get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.3.0", timeOut).ToString();
                     break;
                 case 2:
-                    equipment.Description = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.1.0", timeOut);
-                    equipment.Contact = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.4.0", timeOut);
-                    equipment.Name = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.5.0", timeOut);
-                    equipment.Location = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.6.0", timeOut);
-                    equipment.UpTime = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.3.0", timeOut);
+                    equipment.Description = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.1.0", timeOut).ToString();
+                    equipment.Contact = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.4.0", timeOut).ToString();
+                    equipment.Name = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.5.0", timeOut).ToString();
+                    equipment.Location = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.6.0", timeOut).ToString();
+                    equipment.UpTime = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.3.0", timeOut).ToString();
                     break;
                 default:
                     break;
@@ -62,13 +62,13 @@ namespace SNMPMonitor.Services
             switch (version)
             {
                 case 1:
-                    inter.Index = get.GetResponseV1(ip, port, communit, " 1.3.6.1.2.1.2.2.1.1." + _interface, timeOut);
-                    inter.Description= get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.2." + _interface, timeOut);
-                    inter.Type = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.3." + _interface, timeOut);
-                    inter.Speed = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.5." + _interface, timeOut);
-                    inter.MAC =get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.6." + _interface, timeOut);
-                    inter.Administrative = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.7." + _interface, timeOut);
-                    inter.Operational = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.8." + _interface, timeOut);
+                    inter.Index = get.GetResponseV1(ip, port, communit, " 1.3.6.1.2.1.2.2.1.1." + _interface, timeOut).ToString();
+                    inter.Description= get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.2." + _interface, timeOut).ToString();
+                    inter.Type = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.3." + _interface, timeOut).ToString();
+                    inter.Speed = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.5." + _interface, timeOut).ToString();
+                    inter.MAC = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.6." + _interface, timeOut).ToString();
+                    inter.Administrative = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.7." + _interface, timeOut).ToString();
+                    inter.Operational = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.8." + _interface, timeOut).ToString();
                     break;
                 case 2:
                     inter.Index = get.GetResponseV2(ip, port, communit, " 1.3.6.1.2.1.2.2.1.1." + _interface, timeOut);
@@ -92,7 +92,7 @@ namespace SNMPMonitor.Services
             switch (version)
             {
                 case 1:
-                     index = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.1.0",  timeOut);
+                     index = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.1.0",  timeOut).ToString();
                     break;
                 case 2:
                      index = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.1.0",  timeOut);
