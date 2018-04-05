@@ -17,6 +17,8 @@ namespace SNMPMonitor.Services
         private int version;
         private int timeOut;
         private int retransmition;
+        private int taxaErro;
+        private string decValue;
 
         public GetData(string ip, int port, string communit, int version, int timeOut, int retransmition)
         {
@@ -69,6 +71,10 @@ namespace SNMPMonitor.Services
                     inter.MAC =get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.6." + _interface, timeOut);
                     inter.Administrative = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.7." + _interface, timeOut);
                     inter.Operational = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.8." + _interface, timeOut);
+                    inter.ErrorRateIn = int.Parse(get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.14." + _interface, timeOut));
+                    inter.ErrorRateOut = int.Parse(get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.20." + _interface, timeOut));
+                    inter.DiscardIn = int.Parse(get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.13." + _interface, timeOut));
+                    inter.DiscardOut = int.Parse(get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.19." + _interface, timeOut));
                     break;
                 case 2:
                     inter.Index = get.GetResponseV2(ip, port, communit, " 1.3.6.1.2.1.2.2.1.1." + _interface, timeOut);
@@ -78,6 +84,10 @@ namespace SNMPMonitor.Services
                     inter.MAC = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.6." + _interface, timeOut);
                     inter.Administrative = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.7." + _interface, timeOut);
                     inter.Operational = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.8." + _interface, timeOut);
+                    inter.ErrorRateIn = int.Parse(get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.14." + _interface, timeOut));
+                    inter.ErrorRateOut = int.Parse(get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.20." + _interface, timeOut));
+                    inter.DiscardIn = int.Parse(get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.13." + _interface, timeOut));
+                    inter.DiscardOut = int.Parse(get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.19." + _interface, timeOut));
                     break;
                 default:
                     break;
@@ -103,5 +113,7 @@ namespace SNMPMonitor.Services
             
             return int.Parse(index);
         }
+
+       
     }
 }

@@ -15,6 +15,7 @@ namespace SNMPMonitor.WinApp
     public partial class Principal : Form
     {
         GetData getData;
+        Interface inter;
         public Principal()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace SNMPMonitor.WinApp
             txtResume.Text += "Nome " + equip.Name + "\r\n";
             txtResume.Text += "Local " + equip.Location + "\r\n";
             txtResume.Text += "Tempo Ligado " + equip.UpTime;
+            
 
             int index = getData.GetIndexOfInterfaces();
 
@@ -38,7 +40,9 @@ namespace SNMPMonitor.WinApp
 
             for (int i = 1; i <=index; i++)
             {
-                cmbInterfaces.Items.Add(string.Format("Interface" +i));
+                inter = getData.GetResumeOfInterface(i);
+                if(inter.Index.Length > 0)
+                    cmbInterfaces.Items.Add(inter);
             }
 
 
@@ -46,7 +50,7 @@ namespace SNMPMonitor.WinApp
 
         private void cmbInterfaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Interface inter =  getData.GetResumeOfInterface(cmbInterfaces.SelectedIndex +1);
+            
             txtResumeInterface.Text = "Indice " + inter.Index + "\r\n";
             txtResumeInterface.Text += "Descrição " + inter.Description + "\r\n";
             txtResumeInterface.Text += "Tipo " + inter.Type + "\r\n";
@@ -54,6 +58,25 @@ namespace SNMPMonitor.WinApp
             txtResumeInterface.Text += "MAC " + inter.MAC + "\r\n";
             txtResumeInterface.Text += "Status Administrativos " + inter.Administrative + "\r\n";
             txtResumeInterface.Text += "Status Operacional " + inter.Operational;
+            txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
+            txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
+            txtDiscardIn.Text   = inter.DiscardIn.ToString() + "%";
+            txtDiscardOut.Text = inter.DiscardOut.ToString() + "%";
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtErrorRateIn_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtErrorRateOut_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -15,5 +15,14 @@ namespace SNMPMonitor.Domain
         public string MAC { get; set; }
         public string Administrative { get; set; }
         public string Operational { get; set; }
+        public int ErrorRateIn { get; set; }
+        public int ErrorRateOut { get; set; }
+        public object DiscardIn { get; set; }
+        public object DiscardOut { get; set; }
+
+        public override string ToString()
+        {
+            return "Interface " + Index;
+        }
     }
 }
