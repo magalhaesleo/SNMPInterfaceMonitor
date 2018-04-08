@@ -14,8 +14,9 @@ namespace SNMPMonitor.WinApp
 {
     public partial class Principal : Form
     {
-        GetData getData;
-        Interface inter;
+        private GetData getData;
+        private Interface _interface;
+        int time = 100;
         public Principal()
         {
             InitializeComponent();
@@ -23,60 +24,70 @@ namespace SNMPMonitor.WinApp
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            getData = new GetData(txtIP.Text, int.Parse(txtPort.Text), txtCommunit.Text, int.Parse(txtVersion.Text), int.Parse(txtTimeOut.Text), int.Parse(txtRetransmitions.Text));
+            getData = new GetData(txtIP.Text, (int)numPort.Value, txtCommunit.Text, (int)numVersion.Value, 
+                (int)numTimeOut.Value, (int)numRestransmitions.Value);
             Equipment equip = getData.GetResumeOfEquipment();
-            txtResume.Text = "Descrição " + equip.Description + "\r\n";
+            txtResume.Text = "Descrição: " + equip.Description + "\r\n";
 
-            txtResume.Text += "Contato " + equip.Contact + "\r\n";
-
-            txtResume.Text += "Nome " + equip.Name + "\r\n";
-            txtResume.Text += "Local " + equip.Location + "\r\n";
-            txtResume.Text += "Tempo Ligado " + equip.UpTime;
+            txtResume.Text += "Contato: " + equip.Contact + "\r\n";
+            txtResume.Text += "Nome: " + equip.Name + "\r\n";
+            txtResume.Text += "Local: " + equip.Location + "\r\n";
+            txtResume.Text += "Tempo Ligado: " + equip.UpTime;
             
-
             int index = getData.GetIndexOfInterfaces();
 
             cmbInterfaces.Items.Clear();
 
             for (int i = 1; i <=index; i++)
             {
-                inter = getData.GetResumeOfInterface(i);
-                if(inter.Index.Length > 0)
+                Interface inter = getData.GetResumeOfInterface(i);
+                if(inter.Description.Length > 0)
                     cmbInterfaces.Items.Add(inter);
             }
-
-
         }      
 
         private void cmbInterfaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            txtResumeInterface.Text = "Indice " + inter.Index + "\r\n";
-            txtResumeInterface.Text += "Descrição " + inter.Description + "\r\n";
-            txtResumeInterface.Text += "Tipo " + inter.Type + "\r\n";
-            txtResumeInterface.Text += "Velocidade " + inter.Speed + "\r\n";
-            txtResumeInterface.Text += "MAC " + inter.MAC + "\r\n";
-            txtResumeInterface.Text += "Status Administrativos " + inter.Administrative + "\r\n";
-            txtResumeInterface.Text += "Status Operacional " + inter.Operational;
+            timerUpdateGraphInterface.Enabled = true;
+            _interface = (Interface)cmbInterfaces.SelectedItem;
+            txtResumeInterface.Text = "Indice: " + _interface.Index;
+            txtResumeInterface.AppendText(Environment.NewLine);
+            txtResumeInterface.AppendText("Descrição: " + _interface.Description);
+            txtResumeInterface.AppendText(Environment.NewLine);
+            txtResumeInterface.AppendText("Tipo: " + _interface.Type);
+            txtResumeInterface.AppendText(Environment.NewLine);
+            txtResumeInterface.AppendText("Velocidade: " + _interface.Speed);
+            txtResumeInterface.AppendText(Environment.NewLine);
+            txtResumeInterface.AppendText("MAC: " + _interface.MAC);
+            txtResumeInterface.AppendText(Environment.NewLine);
+            txtResumeInterface.AppendText("Status Administrativos: " + _interface.Administrative);
+            txtResumeInterface.AppendText(Environment.NewLine);
+            txtResumeInterface.AppendText("Status Operacional: " + _interface.Operational);
+
+        }
+        private void timerUpdateGraphInterface_Tick(object sender, EventArgs e)
+        {
+            Interface inter = getData.GetUsageDetailsOfInterface(_interface);
+
+            if (chtInterface.Series[0].Points.Count > 5)
+            {
+                chtInterface.Series[0].Points.RemoveAt(0);
+                chtInterface.Series[1].Points.RemoveAt(0);
+                chtInterface.Update();
+            }
+            time++;
+            chtInterface.Series[0].Points.AddXY(time, inter.InUCastPkts);
+            chtInterface.Series[1].Points.AddXY(time, inter.OutUCastPkts);
             txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
             txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
-            txtDiscardIn.Text   = inter.DiscardIn.ToString() + "%";
+            txtDiscardIn.Text = inter.DiscardIn.ToString() + "%";
             txtDiscardOut.Text = inter.DiscardOut.ToString() + "%";
         }
 
-        private void label13_Click(object sender, EventArgs e)
+        private void numInterval_ValueChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void txtErrorRateIn_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtErrorRateOut_TextChanged(object sender, EventArgs e)
-        {
-
+            timerUpdateGraphInterface.Interval = (int)(numInterval.Value);
+            
         }
     }
 }

@@ -10,110 +10,65 @@ namespace SNMPMonitor.Services
 {
     public class GetData
     {
-        Get get = new Get();
-        private string ip;
-        private int port;
-        private string communit;
-        private int version;
-        private int timeOut;
+        private Get _get;
         private int retransmition;
-        private int taxaErro;
-        private string decValue;
 
         public GetData(string ip, int port, string communit, int version, int timeOut, int retransmition)
         {
-            this.ip = ip;
-            this.port = port;
-            this.communit = communit;
-            this.version = version;
-            this.timeOut = timeOut;
+            _get = new Get(ip, port, communit, version, timeOut);
             this.retransmition = retransmition;
         }
 
         public Equipment GetResumeOfEquipment()
         {
-
             Equipment equipment = new Equipment();
 
-            switch (version)
-            {
-                case 1:
-                    equipment.Description = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.1.0", timeOut);
-                    equipment.Contact =  get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.4.0", timeOut);
-                    equipment.Name =get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.5.0", timeOut);
-                    equipment.Location = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.6.0", timeOut);
-                    equipment.UpTime= get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.3.0", timeOut);
-                    break;
-                case 2:
-                    equipment.Description = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.1.0", timeOut);
-                    equipment.Contact = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.4.0", timeOut);
-                    equipment.Name = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.5.0", timeOut);
-                    equipment.Location = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.6.0", timeOut);
-                    equipment.UpTime = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.1.3.0", timeOut);
-                    break;
-                default:
-                    break;
-            }
-            
+            equipment.Description = _get.GetResponse("1.3.6.1.2.1.1.1.0");
+            equipment.Contact = _get.GetResponse("1.3.6.1.2.1.1.4.0");
+            equipment.Name = _get.GetResponse("1.3.6.1.2.1.1.5.0");
+            equipment.Location = _get.GetResponse("1.3.6.1.2.1.1.6.0");
+            equipment.UpTime = _get.GetResponse("1.3.6.1.2.1.1.3.0");
+
             return equipment;
         }
 
-        public Interface GetResumeOfInterface(int _interface)
+        public Interface GetResumeOfInterface(int index)
         {
             Interface inter = new Interface();
-            switch (version)
-            {
-                case 1:
-                    inter.Index = get.GetResponseV1(ip, port, communit, " 1.3.6.1.2.1.2.2.1.1." + _interface, timeOut);
-                    inter.Description= get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.2." + _interface, timeOut);
-                    inter.Type = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.3." + _interface, timeOut);
-                    inter.Speed = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.5." + _interface, timeOut);
-                    inter.MAC =get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.6." + _interface, timeOut);
-                    inter.Administrative = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.7." + _interface, timeOut);
-                    inter.Operational = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.8." + _interface, timeOut);
-                    inter.ErrorRateIn = int.Parse(get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.14." + _interface, timeOut));
-                    inter.ErrorRateOut = int.Parse(get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.20." + _interface, timeOut));
-                    inter.DiscardIn = int.Parse(get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.13." + _interface, timeOut));
-                    inter.DiscardOut = int.Parse(get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.2.1.19." + _interface, timeOut));
-                    break;
-                case 2:
-                    inter.Index = get.GetResponseV2(ip, port, communit, " 1.3.6.1.2.1.2.2.1.1." + _interface, timeOut);
-                    inter.Description = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.2." + _interface, timeOut);
-                    inter.Type = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.3." + _interface, timeOut);
-                    inter.Speed = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.5." + _interface, timeOut);
-                    inter.MAC = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.6." + _interface, timeOut);
-                    inter.Administrative = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.7." + _interface, timeOut);
-                    inter.Operational = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.8." + _interface, timeOut);
-                    inter.ErrorRateIn = int.Parse(get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.14." + _interface, timeOut));
-                    inter.ErrorRateOut = int.Parse(get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.20." + _interface, timeOut));
-                    inter.DiscardIn = int.Parse(get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.13." + _interface, timeOut));
-                    inter.DiscardOut = int.Parse(get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.2.1.19." + _interface, timeOut));
-                    break;
-                default:
-                    break;
-            }
-            
+            inter.Index = int.Parse(_get.GetResponse(" 1.3.6.1.2.1.2.2.1.1." + index));
+            inter.Description = _get.GetResponse("1.3.6.1.2.1.2.2.1.2." + index);
+            inter.Type = _get.GetResponse("1.3.6.1.2.1.2.2.1.3." + index);
+            inter.Speed = _get.GetResponse("1.3.6.1.2.1.2.2.1.5." + index);
+            inter.MAC = _get.GetResponse("1.3.6.1.2.1.2.2.1.6." + index);
+            inter.Administrative = _get.GetResponse("1.3.6.1.2.1.2.2.1.7." + index);
+            inter.Operational = _get.GetResponse("1.3.6.1.2.1.2.2.1.8." + index);
+            inter.ErrorRateIn = 0;
+            inter.ErrorRateOut = 0;
+            inter.DiscardIn = 0;
+            inter.DiscardOut = 0;
+            inter.InUCastPkts = 0;
+            inter.OutUCastPkts = 0;
+
             return inter;
         }
 
+        public Interface GetUsageDetailsOfInterface(Interface Interface)
+        {
+            Interface.ErrorRateIn = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.14." + Interface.Index));
+            Interface.ErrorRateOut = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.20." + Interface.Index));
+            Interface.DiscardIn = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.13." + Interface.Index));
+            Interface.DiscardOut = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.19." + Interface.Index));
+            Interface.InUCastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.11." + Interface.Index));
+            Interface.OutUCastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.17." + Interface.Index));
+            
+            return Interface;
+        }
         public int GetIndexOfInterfaces()
         {
-            string index = "";
-            switch (version)
-            {
-                case 1:
-                     index = get.GetResponseV1(ip, port, communit, "1.3.6.1.2.1.2.1.0",  timeOut);
-                    break;
-                case 2:
-                     index = get.GetResponseV2(ip, port, communit, "1.3.6.1.2.1.2.1.0",  timeOut);
-                    break;
-                default:
-                    break;
-            }
-            
+            string index = _get.GetResponse("1.3.6.1.2.1.2.1.0");
+
             return int.Parse(index);
         }
 
-       
     }
 }

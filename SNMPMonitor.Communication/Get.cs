@@ -2,42 +2,59 @@
 using Lextm.SharpSnmpLib.Messaging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SNMPMonitor.Communication
 {
     public class Get
     {
-        public string GetResponseV1(string ip, int port, string communit, string oid, int timeout = 60000)
-        {
-            
-            IList<Variable> result = Messenger.Get(VersionCode.V1, new IPEndPoint(IPAddress.Parse(ip), port),
-             new OctetString(communit),
-             new List<Variable> { new Variable(new ObjectIdentifier(oid)) },
-             timeout);
-
-            byte[] bytes = result[0].Data.ToBytes();
-
-
-            string saida = Encoding.ASCII.GetString(bytes);
-
-            //byte[] bytes1 = saida.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries)
-            //                     .Select(s => (byte)Convert.ToInt32(s, 8))
-            //                     .ToArray();
-            //string saida2 = Encoding.UTF8.GetString(bytes1);
-            return result[0].Data.ToString();
+        private string ip;
+        private int port;
+        private string communit;
+        private int timeOut;
+        private readonly VersionCode snmpVersion;
+        public Get(string ip, int port, string communit, int version, int timeOut)
+        {            
+            this.ip = ip;
+            this.port = port;
+            this.communit = communit;
+            switch (version)
+            {
+                case 2:
+                    snmpVersion = VersionCode.V2;
+                    break;
+                default:
+                    snmpVersion = VersionCode.V1;
+                    break;
+            }
+            this.timeOut = timeOut;
         }
 
-        public string GetResponseV2(string ip, int port, string communit, string oid, int timeout = 60000)
-        {
-            IList<Variable> result = Messenger.Get(VersionCode.V2, new IPEndPoint(IPAddress.Parse(ip), port),
+        public string GetResponse(string oid)
+        {             
+            IList<Variable> result = Messenger.Get(snmpVersion, new IPEndPoint(IPAddress.Parse(ip), port),
              new OctetString(communit),
              new List<Variable> { new Variable(new ObjectIdentifier(oid)) },
-             timeout);
+             timeOut);
+
+            if (oid.Substring(0, oid.Length - 2) == "1.3.6.1.2.1.2.2.1.6")
+            {
+                string mac = "";
+                try
+                {
+                    mac = ((OctetString)result[0].Data).ToPhysicalAddress().ToString();
+                    for (int i = 2; i < mac.Length; i += 2)
+                    {
+                        mac = mac.Insert(i, "-");
+                        i++;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+
+                return mac;
+            }
 
             return result[0].Data.ToString();
         }

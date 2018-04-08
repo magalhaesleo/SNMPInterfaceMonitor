@@ -8,7 +8,7 @@ namespace SNMPMonitor.Domain
 {
     public class Interface
     {
-        public string Index { get; set; }
+        public int Index { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
         public string Speed { get; set; }
@@ -17,8 +17,10 @@ namespace SNMPMonitor.Domain
         public string Operational { get; set; }
         public int ErrorRateIn { get; set; }
         public int ErrorRateOut { get; set; }
-        public object DiscardIn { get; set; }
-        public object DiscardOut { get; set; }
+        public int DiscardIn { get; set; }
+        public int DiscardOut { get; set; }
+        public int InUCastPkts { get; set; }
+        public int OutUCastPkts { get; set; }
 
         public override string ToString()
         {
