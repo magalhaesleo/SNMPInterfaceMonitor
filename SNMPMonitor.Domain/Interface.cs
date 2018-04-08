@@ -12,17 +12,17 @@ namespace SNMPMonitor.Domain
         public string Description { get; set; }
         public string Type { get; set; }
         public string Speed { get; set; }
-        private string _MAC;
+        public string MAC { get; set; }
         public string Administrative { get; set; }
         public string Operational { get; set; }
-        public string MAC
+        public int ErrorRateIn { get; set; }
+        public int ErrorRateOut { get; set; }
+        public object DiscardIn { get; set; }
+        public object DiscardOut { get; set; }
+
+        public override string ToString()
         {
-            get
-            {
-                byte[] asciiBytes = Encoding.ASCII.GetBytes(_MAC);
-                return System.Text.Encoding.UTF8.GetString(asciiBytes);
-            }
-            set => _MAC = value;
+            return "Interface " + Index;
         }
     }
 }

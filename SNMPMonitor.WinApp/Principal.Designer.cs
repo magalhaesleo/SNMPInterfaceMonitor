@@ -51,7 +51,13 @@
             this.txtResumeInterface = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtErrorRateIn = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.txtErrorRateOut = new System.Windows.Forms.TextBox();
+            this.taxa = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtDiscardOut = new System.Windows.Forms.TextBox();
+            this.txtDiscardIn = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,7 +119,7 @@
             this.txtCommunit.Name = "txtCommunit";
             this.txtCommunit.Size = new System.Drawing.Size(112, 20);
             this.txtCommunit.TabIndex = 5;
-            this.txtCommunit.Text = "leonardo";
+            this.txtCommunit.Text = "Rodrigo";
             // 
             // label5
             // 
@@ -251,10 +257,19 @@
             // 
             this.panel1.Controls.Add(this.label12);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 359);
+            this.panel1.Location = new System.Drawing.Point(0, 421);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(567, 136);
+            this.panel1.Size = new System.Drawing.Size(598, 136);
             this.panel1.TabIndex = 22;
+            // 
+            // txtErrorRateIn
+            // 
+            this.txtErrorRateIn.Enabled = false;
+            this.txtErrorRateIn.Location = new System.Drawing.Point(16, 383);
+            this.txtErrorRateIn.Name = "txtErrorRateIn";
+            this.txtErrorRateIn.Size = new System.Drawing.Size(35, 20);
+            this.txtErrorRateIn.TabIndex = 1;
+            this.txtErrorRateIn.TextChanged += new System.EventHandler(this.txtErrorRateIn_TextChanged);
             // 
             // label12
             // 
@@ -265,12 +280,62 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "Taxa de Atualização";
             // 
+            // txtErrorRateOut
+            // 
+            this.txtErrorRateOut.Enabled = false;
+            this.txtErrorRateOut.Location = new System.Drawing.Point(57, 383);
+            this.txtErrorRateOut.Name = "txtErrorRateOut";
+            this.txtErrorRateOut.Size = new System.Drawing.Size(35, 20);
+            this.txtErrorRateOut.TabIndex = 2;
+            this.txtErrorRateOut.TextChanged += new System.EventHandler(this.txtErrorRateOut_TextChanged);
+            // 
+            // taxa
+            // 
+            this.taxa.AutoSize = true;
+            this.taxa.Location = new System.Drawing.Point(11, 364);
+            this.taxa.Name = "taxa";
+            this.taxa.Size = new System.Drawing.Size(127, 13);
+            this.taxa.TabIndex = 23;
+            this.taxa.Text = "Taxa de Entrada e Saíde";
+            this.taxa.Click += new System.EventHandler(this.label13_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(157, 364);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(151, 13);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "Descartes de Entrada e Saíde";
+            // 
+            // txtDiscardOut
+            // 
+            this.txtDiscardOut.Enabled = false;
+            this.txtDiscardOut.Location = new System.Drawing.Point(203, 383);
+            this.txtDiscardOut.Name = "txtDiscardOut";
+            this.txtDiscardOut.Size = new System.Drawing.Size(35, 20);
+            this.txtDiscardOut.TabIndex = 25;
+            // 
+            // txtDiscardIn
+            // 
+            this.txtDiscardIn.Enabled = false;
+            this.txtDiscardIn.Location = new System.Drawing.Point(162, 383);
+            this.txtDiscardIn.Name = "txtDiscardIn";
+            this.txtDiscardIn.Size = new System.Drawing.Size(35, 20);
+            this.txtDiscardIn.TabIndex = 24;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 495);
+            this.ClientSize = new System.Drawing.Size(598, 557);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtDiscardOut);
+            this.Controls.Add(this.txtDiscardIn);
+            this.Controls.Add(this.taxa);
+            this.Controls.Add(this.txtErrorRateOut);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.txtErrorRateIn);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtResumeInterface);
             this.Controls.Add(this.label10);
@@ -331,6 +396,12 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtErrorRateIn;
+        private System.Windows.Forms.TextBox txtErrorRateOut;
+        private System.Windows.Forms.Label taxa;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtDiscardOut;
+        private System.Windows.Forms.TextBox txtDiscardIn;
     }
 }
 
