@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtIP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -68,6 +67,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.maskedIP = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRestransmitions)).BeginInit();
@@ -85,18 +85,10 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Dados do Equipamento";
             // 
-            // txtIP
-            // 
-            this.txtIP.Location = new System.Drawing.Point(6, 57);
-            this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(90, 20);
-            this.txtIP.TabIndex = 1;
-            this.txtIP.Text = "127.0.0.1";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 41);
+            this.label2.Location = new System.Drawing.Point(3, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(20, 13);
             this.label2.TabIndex = 2;
@@ -105,7 +97,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(273, 41);
+            this.label3.Location = new System.Drawing.Point(273, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 4;
@@ -114,7 +106,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(155, 41);
+            this.label4.Location = new System.Drawing.Point(155, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 6;
@@ -122,16 +114,16 @@
             // 
             // txtCommunit
             // 
-            this.txtCommunit.Location = new System.Drawing.Point(158, 57);
+            this.txtCommunit.Location = new System.Drawing.Point(158, 40);
             this.txtCommunit.Name = "txtCommunit";
             this.txtCommunit.Size = new System.Drawing.Size(112, 20);
             this.txtCommunit.TabIndex = 3;
-            this.txtCommunit.Text = "leonardo";
+            this.txtCommunit.Text = "public";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(103, 41);
+            this.label5.Location = new System.Drawing.Point(103, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 8;
@@ -140,7 +132,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(393, 41);
+            this.label6.Location = new System.Drawing.Point(393, 24);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(84, 13);
             this.label6.TabIndex = 11;
@@ -149,7 +141,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(325, 41);
+            this.label7.Location = new System.Drawing.Point(325, 24);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 12;
@@ -157,17 +149,17 @@
             // 
             // txtResume
             // 
-            this.txtResume.Location = new System.Drawing.Point(6, 109);
+            this.txtResume.Location = new System.Drawing.Point(6, 79);
             this.txtResume.Multiline = true;
             this.txtResume.Name = "txtResume";
-            this.txtResume.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResume.Size = new System.Drawing.Size(544, 69);
+            this.txtResume.ReadOnly = true;
+            this.txtResume.Size = new System.Drawing.Size(544, 99);
             this.txtResume.TabIndex = 13;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 93);
+            this.label8.Location = new System.Drawing.Point(3, 63);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 13);
             this.label8.TabIndex = 14;
@@ -175,7 +167,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(475, 55);
+            this.btnBuscar.Location = new System.Drawing.Point(475, 38);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 7;
@@ -216,6 +208,7 @@
             this.txtResumeInterface.Location = new System.Drawing.Point(6, 248);
             this.txtResumeInterface.Multiline = true;
             this.txtResumeInterface.Name = "txtResumeInterface";
+            this.txtResumeInterface.ReadOnly = true;
             this.txtResumeInterface.Size = new System.Drawing.Size(544, 99);
             this.txtResumeInterface.TabIndex = 20;
             // 
@@ -231,7 +224,7 @@
             // txtErrorRateIn
             // 
             this.txtErrorRateIn.Enabled = false;
-            this.txtErrorRateIn.Location = new System.Drawing.Point(86, 551);
+            this.txtErrorRateIn.Location = new System.Drawing.Point(102, 551);
             this.txtErrorRateIn.Name = "txtErrorRateIn";
             this.txtErrorRateIn.ReadOnly = true;
             this.txtErrorRateIn.Size = new System.Drawing.Size(35, 20);
@@ -251,18 +244,18 @@
             this.taxa.AutoSize = true;
             this.taxa.Location = new System.Drawing.Point(103, 519);
             this.taxa.Name = "taxa";
-            this.taxa.Size = new System.Drawing.Size(67, 13);
+            this.taxa.Size = new System.Drawing.Size(70, 13);
             this.taxa.TabIndex = 23;
-            this.taxa.Text = "Taxa de erro";
+            this.taxa.Text = "Taxa de erro:";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(370, 519);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(95, 13);
+            this.label13.Size = new System.Drawing.Size(93, 13);
             this.label13.TabIndex = 26;
-            this.label13.Text = "Taxa de descartes";
+            this.label13.Text = "Taxa de descarte:";
             // 
             // txtDiscardOut
             // 
@@ -284,13 +277,14 @@
             // 
             // numPort
             // 
-            this.numPort.Location = new System.Drawing.Point(102, 57);
+            this.numPort.Location = new System.Drawing.Point(102, 40);
             this.numPort.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
             this.numPort.Name = "numPort";
+            this.numPort.ReadOnly = true;
             this.numPort.Size = new System.Drawing.Size(50, 20);
             this.numPort.TabIndex = 2;
             this.numPort.Value = new decimal(new int[] {
@@ -301,13 +295,14 @@
             // 
             // numTimeOut
             // 
-            this.numTimeOut.Location = new System.Drawing.Point(328, 57);
+            this.numTimeOut.Location = new System.Drawing.Point(328, 40);
             this.numTimeOut.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
             this.numTimeOut.Name = "numTimeOut";
+            this.numTimeOut.ReadOnly = true;
             this.numTimeOut.Size = new System.Drawing.Size(62, 20);
             this.numTimeOut.TabIndex = 5;
             this.numTimeOut.Value = new decimal(new int[] {
@@ -318,13 +313,14 @@
             // 
             // numRestransmitions
             // 
-            this.numRestransmitions.Location = new System.Drawing.Point(396, 57);
+            this.numRestransmitions.Location = new System.Drawing.Point(396, 40);
             this.numRestransmitions.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
             this.numRestransmitions.Name = "numRestransmitions";
+            this.numRestransmitions.ReadOnly = true;
             this.numRestransmitions.Size = new System.Drawing.Size(69, 20);
             this.numRestransmitions.TabIndex = 6;
             this.numRestransmitions.Value = new decimal(new int[] {
@@ -337,15 +333,21 @@
             // 
             this.numInterval.Location = new System.Drawing.Point(475, 200);
             this.numInterval.Maximum = new decimal(new int[] {
-            100000,
+            60,
+            0,
+            0,
+            0});
+            this.numInterval.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
             this.numInterval.Name = "numInterval";
+            this.numInterval.ReadOnly = true;
             this.numInterval.Size = new System.Drawing.Size(75, 20);
             this.numInterval.TabIndex = 18;
             this.numInterval.Value = new decimal(new int[] {
-            1500,
+            2,
             0,
             0,
             0});
@@ -353,7 +355,7 @@
             // 
             // numVersion
             // 
-            this.numVersion.Location = new System.Drawing.Point(276, 57);
+            this.numVersion.Location = new System.Drawing.Point(276, 40);
             this.numVersion.Maximum = new decimal(new int[] {
             2,
             0,
@@ -365,6 +367,7 @@
             0,
             0});
             this.numVersion.Name = "numVersion";
+            this.numVersion.ReadOnly = true;
             this.numVersion.Size = new System.Drawing.Size(46, 20);
             this.numVersion.TabIndex = 4;
             this.numVersion.Value = new decimal(new int[] {
@@ -376,40 +379,42 @@
             // chtInterface
             // 
             this.chtInterface.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.CursorY.IsUserEnabled = true;
-            chartArea1.CursorY.IsUserSelectionEnabled = true;
-            chartArea1.Name = "chtAreaUtilizationInterface";
-            this.chtInterface.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtInterface.Legends.Add(legend1);
+            this.chtInterface.BorderSkin.BorderColor = System.Drawing.Color.White;
+            chartArea3.CursorX.IsUserEnabled = true;
+            chartArea3.CursorX.IsUserSelectionEnabled = true;
+            chartArea3.CursorY.IsUserEnabled = true;
+            chartArea3.CursorY.IsUserSelectionEnabled = true;
+            chartArea3.Name = "chtAreaUtilizationInterface";
+            this.chtInterface.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chtInterface.Legends.Add(legend3);
             this.chtInterface.Location = new System.Drawing.Point(6, 353);
             this.chtInterface.Name = "chtInterface";
             this.chtInterface.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.ChartArea = "chtAreaUtilizationInterface";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.Legend = "Legend1";
-            series1.LegendText = "Entrada de Dados";
-            series1.Name = "GraphInterfaceIn";
-            series1.YValuesPerPoint = 2;
-            series2.ChartArea = "chtAreaUtilizationInterface";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series2.Legend = "Legend1";
-            series2.LegendText = "Saida de Dados";
-            series2.Name = "GraphInterfaceOut";
-            this.chtInterface.Series.Add(series1);
-            this.chtInterface.Series.Add(series2);
+            series5.ChartArea = "chtAreaUtilizationInterface";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series5.Legend = "Legend1";
+            series5.LegendText = "Entrada de Dados";
+            series5.Name = "GraphInterfaceIn";
+            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            series6.ChartArea = "chtAreaUtilizationInterface";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series6.Legend = "Legend1";
+            series6.LegendText = "Saida de Dados";
+            series6.Name = "GraphInterfaceOut";
+            series6.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            this.chtInterface.Series.Add(series5);
+            this.chtInterface.Series.Add(series6);
             this.chtInterface.Size = new System.Drawing.Size(544, 150);
             this.chtInterface.TabIndex = 27;
             this.chtInterface.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Taxa de Utilização";
-            this.chtInterface.Titles.Add(title1);
+            title3.Name = "Title1";
+            title3.Text = "Taxa de Utilização";
+            this.chtInterface.Titles.Add(title3);
             // 
             // timerUpdateGraphInterface
             // 
-            this.timerUpdateGraphInterface.Interval = 500;
+            this.timerUpdateGraphInterface.Interval = 2000;
             this.timerUpdateGraphInterface.Tick += new System.EventHandler(this.timerUpdateGraphInterface_Tick);
             // 
             // label12
@@ -424,7 +429,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(81, 535);
+            this.label14.Location = new System.Drawing.Point(99, 535);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(44, 13);
             this.label14.TabIndex = 29;
@@ -448,11 +453,21 @@
             this.label16.TabIndex = 31;
             this.label16.Text = "Saida";
             // 
+            // maskedIP
+            // 
+            this.maskedIP.Location = new System.Drawing.Point(6, 38);
+            this.maskedIP.Mask = "###.###.###.###";
+            this.maskedIP.Name = "maskedIP";
+            this.maskedIP.Size = new System.Drawing.Size(88, 20);
+            this.maskedIP.TabIndex = 1;
+            this.maskedIP.Text = "127000000001";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 585);
+            this.Controls.Add(this.maskedIP);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
@@ -484,7 +499,6 @@
             this.Controls.Add(this.txtCommunit);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtIP);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.Name = "Principal";
@@ -505,7 +519,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -538,6 +551,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.MaskedTextBox maskedIP;
     }
 }
 

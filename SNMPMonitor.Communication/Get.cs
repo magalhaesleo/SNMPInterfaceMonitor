@@ -8,55 +8,67 @@ namespace SNMPMonitor.Communication
 {
     public class Get
     {
-        private string ip;
-        private int port;
-        private string communit;
-        private int timeOut;
-        private readonly VersionCode snmpVersion;
-        public Get(string ip, int port, string communit, int version, int timeOut)
-        {            
-            this.ip = ip;
-            this.port = port;
-            this.communit = communit;
+        private string _ip;
+        private int _port;
+        private string _communit;
+        private int _timeOut;
+        private int _tries;
+        private readonly VersionCode _snmpVersion;
+        public Get(string ip, int port, string communit, int version, int timeOut, int tries)
+        {
+            this._ip = ip;
+            this._port = port;
+            this._communit = communit;
+            this._tries = tries;
+
             switch (version)
             {
                 case 2:
-                    snmpVersion = VersionCode.V2;
+                    _snmpVersion = VersionCode.V2;
                     break;
                 default:
-                    snmpVersion = VersionCode.V1;
+                    _snmpVersion = VersionCode.V1;
                     break;
             }
-            this.timeOut = timeOut;
+            this._timeOut = timeOut;
         }
 
         public string GetResponse(string oid)
-        {             
-            IList<Variable> result = Messenger.Get(snmpVersion, new IPEndPoint(IPAddress.Parse(ip), port),
-             new OctetString(communit),
-             new List<Variable> { new Variable(new ObjectIdentifier(oid)) },
-             timeOut);
+        {
+            int retries = 0;
 
-            if (oid.Substring(0, oid.Length - 2) == "1.3.6.1.2.1.2.2.1.6")
+            while (retries < _tries)
             {
-                string mac = "";
-                try
+                IList<Variable> result = Messenger.Get(_snmpVersion, new IPEndPoint(IPAddress.Parse(_ip), _port),
+                 new OctetString(_communit),
+                 new List<Variable> { new Variable(new ObjectIdentifier(oid)) },
+                 _timeOut);
+
+                if (oid.Substring(0, oid.Length - 2) == "1.3.6.1.2.1.2.2.1.6")
                 {
-                    mac = ((OctetString)result[0].Data).ToPhysicalAddress().ToString();
-                    for (int i = 2; i < mac.Length; i += 2)
+                    string mac = "";
+                    try
                     {
-                        mac = mac.Insert(i, "-");
-                        i++;
+                        mac = ((OctetString)result[0].Data).ToPhysicalAddress().ToString();
+                        for (int i = 2; i < mac.Length; i += 2)
+                        {
+                            mac = mac.Insert(i, "-");
+                            i++;
+                        }
                     }
-                }
-                catch (Exception)
-                {
+                    catch (Exception)
+                    {
+                    }
+                    if (mac.Length > 0)
+                        return mac;
                 }
 
-                return mac;
+                if (result.Count > 0)                
+                    return result[0].Data.ToString();
+       
+                retries++;
             }
-
-            return result[0].Data.ToString();
+            return "";
         }
     }
 }
