@@ -8,12 +8,10 @@ namespace SNMPMonitor.Services
     public class GetData
     {
         private Get _get;
-        private int retransmition;
 
         public GetData(string ip, int port, string communit, int version, int timeOut, int retransmition)
         {
             _get = new Get(ip, port, communit, version, timeOut, retransmition);
-            this.retransmition = retransmition;
         }
 
         public Equipment GetResumeOfEquipment()
