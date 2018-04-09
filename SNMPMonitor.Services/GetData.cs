@@ -38,13 +38,11 @@ namespace SNMPMonitor.Services
             Interface inter = new Interface();
             inter.Index = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.1." + index));
             inter.Description = _get.GetResponse("1.3.6.1.2.1.2.2.1.2." + index);
-            string type = _get.GetResponse("1.3.6.1.2.1.2.2.1.3." + index);
-            NetworkInterfaceType interfaceType = (NetworkInterfaceType)int.Parse(type);
-            inter.Type = interfaceType.ToString()+ " ("+ type +")";
+            inter.Type = _get.GetResponse("1.3.6.1.2.1.2.2.1.3." + index);
             inter.Speed = _get.GetResponse("1.3.6.1.2.1.2.2.1.5." + index);
             inter.MAC = _get.GetResponse("1.3.6.1.2.1.2.2.1.6." + index);
-            inter.Administrative = _get.GetResponse("1.3.6.1.2.1.2.2.1.7." + index);
-            inter.Operational = _get.GetResponse("1.3.6.1.2.1.2.2.1.8." + index);
+            inter.AdministrativeStatus = _get.GetResponse("1.3.6.1.2.1.2.2.1.7." + index);
+            inter.OperationalStatus = _get.GetResponse("1.3.6.1.2.1.2.2.1.8." + index);
             inter.ErrorRateIn = 0;
             inter.ErrorRateOut = 0;
             inter.DiscardIn = 0;

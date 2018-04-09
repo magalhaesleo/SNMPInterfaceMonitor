@@ -94,9 +94,9 @@ namespace SNMPMonitor.WinApp
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("MAC: " + _interface.MAC);
             txtResumeInterface.AppendText(Environment.NewLine);
-            txtResumeInterface.AppendText("Status Administrativos: " + _interface.Administrative);
+            txtResumeInterface.AppendText("Status Administrativos: " + _interface.AdministrativeStatus);
             txtResumeInterface.AppendText(Environment.NewLine);
-            txtResumeInterface.AppendText("Status Operacional: " + _interface.Operational);
+            txtResumeInterface.AppendText("Status Operacional: " + _interface.OperationalStatus);
 
         }
         private void timerUpdateGraphInterface_Tick(object sender, EventArgs e)
