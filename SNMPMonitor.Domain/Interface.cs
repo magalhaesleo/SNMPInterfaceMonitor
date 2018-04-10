@@ -11,28 +11,76 @@ namespace SNMPMonitor.Domain
     {
         public int Index { get; set; }
         public string Description { get; set; }
-        private int type;
+        private int _type;
         public string MAC { get; set; }
         public int IfInOctets { get; set; }
         public int IfOutOctets { get; set; }
         public OperationalStatus AdministrativeStatus { get; set; }
         private int operationalStatus { get; set; }
         public OperationalStatus OperationalStatus { get; set; }
-        public int ErrorRateIn { get; set; }
-        public int ErrorRateOut { get; set; }
+        public int IfInUcastPkts { get; set; }
+        public int IfInNUcastPkts { get; set; }
+        public int IfOutUcastPkts { get; set; }
+        public int IfOutNUcastPkts { get; set; }
+        public int IfInErrors { get; set; }
+        public int IfOutErrors { get; set; }
         public int DiscardIn { get; set; }
         public int DiscardOut { get; set; }
         public string Speed { get; set; }
+        public int ErrorRateIn
+        {
+            get
+            {
+                int ret = 0;
+                if (IfInErrors != 0 && (IfInUcastPkts != 0 || IfInNUcastPkts != 0))
+                    ret = IfInErrors / (IfInUcastPkts + IfInNUcastPkts);
+
+                return ret;
+            }
+        }
+        public int ErrorRateOut
+        {
+            get
+            {
+                int ret = 0;
+                if (IfOutErrors != 0 && (IfOutUcastPkts != 0 || IfOutNUcastPkts != 0))
+                    ret = IfOutErrors / (IfOutUcastPkts + IfOutNUcastPkts);
+
+                return ret;
+            }
+        }
+        public int DiscardRateIn
+        {
+            get
+            {
+                int ret = 0;
+                if (DiscardIn != 0 && (IfInUcastPkts != 0 || IfInNUcastPkts != 0))
+                    ret = DiscardIn / (IfInUcastPkts + IfInNUcastPkts);
+
+                return ret;
+
+            }
+        }        
+        public int DiscardRateOut
+        {
+            get
+            {
+                int ret = 0;
+                if (DiscardOut != 0 && (IfOutUcastPkts != 0 || IfOutNUcastPkts != 0))
+                    ret = DiscardOut / (IfOutUcastPkts + IfOutNUcastPkts);
+                return ret;
+            }
+        }
         public string Type
         {
             get
             {
-                NetworkInterfaceType interfaceType = (NetworkInterfaceType)type;
-                return interfaceType.ToString() + " (" + type + ")";
+                NetworkInterfaceType interfaceType = (NetworkInterfaceType)_type;
+                return interfaceType.ToString() + " (" + _type + ")";
             }
             set
             {
-                type = int.Parse(value);
+                _type = int.Parse(value);
             }
         }
         public string Status

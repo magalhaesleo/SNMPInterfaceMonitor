@@ -111,8 +111,8 @@ namespace SNMPMonitor.WinApp
 
                 txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
                 txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
-                txtDiscardIn.Text = inter.DiscardIn.ToString() + "%";
-                txtDiscardOut.Text = inter.DiscardOut.ToString() + "%";
+                txtDiscardIn.Text = inter.DiscardRateIn.ToString() + "%";
+                txtDiscardOut.Text = inter.DiscardRateOut.ToString() + "%";
             }
             catch (Exception ex)
             {

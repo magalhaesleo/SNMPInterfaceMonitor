@@ -51,34 +51,16 @@ namespace SNMPMonitor.Services
         public Interface GetUsageDetailsOfInterface(Interface Interface)
         {
             //Capturar a quantidade de pacotes de entrada
-            int ifInUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.11." + Interface.Index));
-            int ifInNUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.12." + Interface.Index));
+            Interface.IfInUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.11." + Interface.Index));
+            Interface.IfInNUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.12." + Interface.Index));
 
             //Capturar a quantidade de pacotes de saida            
-            int ifOutUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.17." + Interface.Index));
-            int ifOutNUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.18." + Interface.Index));
-
-            //Validar se o valor nao é zero para nao fazer a divisao
-            if (ifInUcastPkts != 0 || ifInNUcastPkts != 0)
-            {
-                int ifInErrors = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.14." + Interface.Index));
-                if (ifInErrors != 0)
-                    Interface.ErrorRateIn = ifInErrors / (ifInUcastPkts + ifInNUcastPkts);
-
-                int DiscardIn = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.13." + Interface.Index));
-                if (DiscardIn != 0)
-                    Interface.DiscardIn = DiscardIn / (ifInUcastPkts + ifInNUcastPkts);
-            }
-            if (ifOutUcastPkts != 0 || ifOutNUcastPkts != 0)
-            {
-                int ifOutErrors = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.20." + Interface.Index));
-                if (ifOutErrors != 0)
-                    Interface.ErrorRateOut = ifOutErrors / (ifOutUcastPkts + ifOutNUcastPkts);
-
-                int DiscardOut = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.19." + Interface.Index));
-                if (DiscardOut != 0)
-                    Interface.DiscardOut = DiscardOut / (ifOutUcastPkts + ifOutNUcastPkts);
-            }
+            Interface.IfOutUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.17." + Interface.Index));
+            Interface.IfOutNUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.18." + Interface.Index));
+            Interface.IfInErrors = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.14." + Interface.Index));
+            Interface.IfOutErrors = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.20." + Interface.Index));
+            Interface.DiscardIn = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.13." + Interface.Index));
+            Interface.DiscardOut = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.19." + Interface.Index));
 
             //Capturar os dados de uso da interface
             Interface.IfInOctets = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.10." + Interface.Index));
