@@ -106,8 +106,8 @@ namespace SNMPMonitor.WinApp
                 }
 
                 string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
-                chtInterface.Series[0].Points.AddXY(hourNow, inter.InputUtilization);
-                chtInterface.Series[1].Points.AddXY(hourNow, inter.OutputUtilization);
+                chtInterface.Series[0].Points.AddXY(hourNow, System.Math.Round(inter.InputUtilization,2));
+                chtInterface.Series[1].Points.AddXY(hourNow, System.Math.Round(inter.OutputUtilization,2));
 
                 txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
                 txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";

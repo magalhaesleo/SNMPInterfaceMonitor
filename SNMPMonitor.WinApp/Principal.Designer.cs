@@ -465,7 +465,7 @@
             this.maskedIP.Name = "maskedIP";
             this.maskedIP.Size = new System.Drawing.Size(88, 20);
             this.maskedIP.TabIndex = 1;
-            this.maskedIP.Text = "172031249038";
+            this.maskedIP.Text = "000000000000";
             // 
             // Principal
             // 

@@ -46,8 +46,9 @@ namespace SNMPMonitor.Domain
                 long inOctects = IfInOctets - _oldIfInOctets;                                
                 long totalBits = (inOctects * 8) * 100;
                 _oldIfInOctets = IfInOctets;
+                double speedPerSecond = elapsedSpan.TotalSeconds * Speed;
 
-                return totalBits / elapsedSpan.TotalSeconds;
+                return totalBits / speedPerSecond;
             }
         }
         public double OutputUtilization
@@ -65,7 +66,9 @@ namespace SNMPMonitor.Domain
                 long totalBits = (outOctects * 8) * 100;
                 _oldIfInOctets = IfOutOctets;
 
-                return totalBits / elapsedSpan.TotalSeconds;
+                double speedPerSecond = elapsedSpan.TotalSeconds * Speed;
+
+                return totalBits / speedPerSecond;
             }
         }
         public int ErrorRateIn
