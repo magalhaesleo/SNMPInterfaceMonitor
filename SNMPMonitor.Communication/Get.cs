@@ -44,7 +44,7 @@ namespace SNMPMonitor.Communication
                  new List<Variable> { new Variable(new ObjectIdentifier(oid)) },
                  _timeOut);
 
-                if (oid.Substring(0, oid.Length - 2) == "1.3.6.1.2.1.2.2.1.6")
+                if (oid.Substring(0, oid.LastIndexOf(".")) == "1.3.6.1.2.1.2.2.1.6")
                 {
                     string mac = "";
                     try

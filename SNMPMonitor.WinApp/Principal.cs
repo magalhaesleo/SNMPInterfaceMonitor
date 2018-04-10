@@ -1,13 +1,6 @@
 ﻿using SNMPMonitor.Domain;
 using SNMPMonitor.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SNMPMonitor.WinApp
@@ -25,17 +18,13 @@ namespace SNMPMonitor.WinApp
         private void ValidateFields()
         {
             if (!maskedIP.MaskFull)
-            {
                 throw new Exception("O endereço IP não foi preenchido corretamente!");
-            }
+
             if (string.IsNullOrEmpty(txtCommunit.Text))
-            {
                 throw new Exception("O campo comunidade deve estar preenchido!");
-            }
+
             if (txtCommunit.Text.Contains(" "))
-            {
                 throw new Exception("O campo comunidade não deve possuir espaços!");
-            }
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -90,34 +79,45 @@ namespace SNMPMonitor.WinApp
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Tipo: " + _interface.Type);
             txtResumeInterface.AppendText(Environment.NewLine);
-            txtResumeInterface.AppendText("Velocidade: " + _interface.Speed);
+            int Speed;
+            int.TryParse(_interface.Speed, out Speed);
+            txtResumeInterface.AppendText("Velocidade: " + (Speed > 0 ? (Speed / 1024) / 8 : 0) + "Mb/s");
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("MAC: " + _interface.MAC);
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Status Administrativos: " + _interface.AdministrativeStatus);
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Status Operacional: " + _interface.OperationalStatus);
+            txtResumeInterface.AppendText(Environment.NewLine);
+            txtResumeInterface.AppendText("Status da Interface: " + _interface.Status);
 
         }
         private void timerUpdateGraphInterface_Tick(object sender, EventArgs e)
         {
-            Interface inter = getData.GetUsageDetailsOfInterface(_interface);
-
-            if (chtInterface.Series[0].Points.Count > 4)
+            try
             {
-                chtInterface.Series[0].Points.RemoveAt(0);
-                chtInterface.Series[1].Points.RemoveAt(0);
-                chtInterface.Update();
-            }
-            
-            string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
-            chtInterface.Series[0].Points.AddXY(hourNow, inter.InUCastPkts);
-            chtInterface.Series[1].Points.AddXY(hourNow, inter.OutUCastPkts);
+                Interface inter = getData.GetUsageDetailsOfInterface(_interface);
 
-            txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
-            txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
-            txtDiscardIn.Text = inter.DiscardIn.ToString() + "%";
-            txtDiscardOut.Text = inter.DiscardOut.ToString() + "%";
+                if (chtInterface.Series[0].Points.Count > 4)
+                {
+                    chtInterface.Series[0].Points.RemoveAt(0);
+                    chtInterface.Series[1].Points.RemoveAt(0);
+                    chtInterface.Update();
+                }
+
+                string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
+                chtInterface.Series[0].Points.AddXY(hourNow, inter.IfInOctets);
+                chtInterface.Series[1].Points.AddXY(hourNow, inter.IfOutOctets);
+
+                txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
+                txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
+                txtDiscardIn.Text = inter.DiscardIn.ToString() + "%";
+                txtDiscardOut.Text = inter.DiscardOut.ToString() + "%";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Atenção");
+            }
         }
 
         private void numInterval_ValueChanged(object sender, EventArgs e)
