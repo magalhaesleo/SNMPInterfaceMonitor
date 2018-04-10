@@ -26,7 +26,48 @@ namespace SNMPMonitor.Domain
         public int IfOutErrors { get; set; }
         public int DiscardIn { get; set; }
         public int DiscardOut { get; set; }
-        public string Speed { get; set; }
+        public int Speed { get; set; }
+        private int _oldIfInOctets = 0;
+        private int _oldIfOutOctets = 0;
+        private DateTime _inOldTime = DateTime.Now;
+        private DateTime _outOldTime = DateTime.Now;
+
+        public double InputUtilization
+        {
+            get
+            {
+                //Calculo do tempo gasto
+                DateTime _currentTime = DateTime.Now;
+                long elapsedTicks = _currentTime.Ticks - _inOldTime.Ticks;
+                TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+                _inOldTime = _currentTime;                          
+                
+                //Calculo da quantia de bits usado nesse intervalo de tempo
+                long inOctects = IfInOctets - _oldIfInOctets;                                
+                long totalBits = (inOctects * 8) * 100;
+                _oldIfInOctets = IfInOctets;
+
+                return totalBits / elapsedSpan.TotalSeconds;
+            }
+        }
+        public double OutputUtilization
+        {
+            get
+            {
+                //Calculo do tempo gasto
+                DateTime _currentTime = DateTime.Now;
+                long elapsedTicks = _currentTime.Ticks - _outOldTime.Ticks;
+                TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+                _outOldTime = _currentTime;
+
+                //Calculo da quantia de bits usado nesse intervalo de tempo
+                long outOctects = IfOutOctets - _oldIfOutOctets;
+                long totalBits = (outOctects * 8) * 100;
+                _oldIfInOctets = IfOutOctets;
+
+                return totalBits / elapsedSpan.TotalSeconds;
+            }
+        }
         public int ErrorRateIn
         {
             get
@@ -60,7 +101,7 @@ namespace SNMPMonitor.Domain
                 return ret;
 
             }
-        }        
+        }
         public int DiscardRateOut
         {
             get

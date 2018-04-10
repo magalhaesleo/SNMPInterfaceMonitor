@@ -25,6 +25,7 @@ namespace SNMPMonitor.WinApp
 
             if (txtCommunit.Text.Contains(" "))
                 throw new Exception("O campo comunidade não deve possuir espaços!");
+
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -79,9 +80,8 @@ namespace SNMPMonitor.WinApp
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Tipo: " + _interface.Type);
             txtResumeInterface.AppendText(Environment.NewLine);
-            int Speed;
-            int.TryParse(_interface.Speed, out Speed);
-            txtResumeInterface.AppendText("Velocidade: " + (Speed > 0 ? (Speed / 1024) / 8 : 0) + "Mb/s");
+            int Speed = _interface.Speed;
+            txtResumeInterface.AppendText("Velocidade: " + ( Speed > 0 ? (Speed / 1024) / 8 : 0) + "Mb/s");
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("MAC: " + _interface.MAC);
             txtResumeInterface.AppendText(Environment.NewLine);
@@ -106,8 +106,8 @@ namespace SNMPMonitor.WinApp
                 }
 
                 string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
-                chtInterface.Series[0].Points.AddXY(hourNow, inter.IfInOctets);
-                chtInterface.Series[1].Points.AddXY(hourNow, inter.IfOutOctets);
+                chtInterface.Series[0].Points.AddXY(hourNow, inter.InputUtilization);
+                chtInterface.Series[1].Points.AddXY(hourNow, inter.OutputUtilization);
 
                 txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
                 txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
