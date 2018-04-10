@@ -29,27 +29,43 @@ namespace SNMPMonitor.Domain
         public int Speed { get; set; }
         private int _oldIfInOctets = 0;
         private int _oldIfOutOctets = 0;
-        DateTime _oldTime = DateTime.Now;
-        DateTime _currentTime;
+        private DateTime _inOldTime = DateTime.Now;
+        private DateTime _outOldTime = DateTime.Now;
 
-        public double Utilization
+        public double InputUtilization
         {
             get
             {
-                _currentTime = DateTime.Now;
-                long elapsedTicks = _currentTime.Ticks - _oldTime.Ticks;
+                //Calculo do tempo gasto
+                DateTime _currentTime = DateTime.Now;
+                long elapsedTicks = _currentTime.Ticks - _inOldTime.Ticks;
                 TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
-                _oldTime = _currentTime;
-                double totalBytes = IfInOctets - _oldIfInOctets;
-                if (totalBytes == 0)
-                    return 0;
-
-                double bytesPerSecond = (totalBytes * 8) * 100;
+                _inOldTime = _currentTime;                          
+                
+                //Calculo da quantia de bits usado nesse intervalo de tempo
+                long inOctects = IfInOctets - _oldIfInOctets;                                
+                long totalBits = (inOctects * 8) * 100;
                 _oldIfInOctets = IfInOctets;
-                _oldIfOutOctets = IfOutOctets;
-                double SpeedPerSecond = elapsedSpan.Seconds * Speed;
-                double div = bytesPerSecond / SpeedPerSecond;
-                return div * 100;
+
+                return totalBits / elapsedSpan.TotalSeconds;
+            }
+        }
+        public double OutputUtilization
+        {
+            get
+            {
+                //Calculo do tempo gasto
+                DateTime _currentTime = DateTime.Now;
+                long elapsedTicks = _currentTime.Ticks - _outOldTime.Ticks;
+                TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+                _outOldTime = _currentTime;
+
+                //Calculo da quantia de bits usado nesse intervalo de tempo
+                long outOctects = IfOutOctets - _oldIfOutOctets;
+                long totalBits = (outOctects * 8) * 100;
+                _oldIfInOctets = IfOutOctets;
+
+                return totalBits / elapsedSpan.TotalSeconds;
             }
         }
         public int ErrorRateIn

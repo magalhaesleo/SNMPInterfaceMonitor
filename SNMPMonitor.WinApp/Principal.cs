@@ -25,6 +25,7 @@ namespace SNMPMonitor.WinApp
 
             if (txtCommunit.Text.Contains(" "))
                 throw new Exception("O campo comunidade não deve possuir espaços!");
+
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -100,15 +101,13 @@ namespace SNMPMonitor.WinApp
                 if (chtInterface.Series[0].Points.Count > 4)
                 {
                     chtInterface.Series[0].Points.RemoveAt(0);
-                    //chtInterface.Series[1].Points.RemoveAt(0);
+                    chtInterface.Series[1].Points.RemoveAt(0);
                     chtInterface.Update();
                 }
 
                 string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
-                double var = inter.Utilization;
-                int teste = (int)var;
-                chtInterface.Series[0].Points.AddXY(hourNow, teste.ToString());
-                //chtInterface.Series[1].Points.AddXY(hourNow, inter.IfOutOctets);
+                chtInterface.Series[0].Points.AddXY(hourNow, inter.InputUtilization);
+                chtInterface.Series[1].Points.AddXY(hourNow, inter.OutputUtilization);
 
                 txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
                 txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";

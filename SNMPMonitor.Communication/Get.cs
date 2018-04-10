@@ -16,7 +16,7 @@ namespace SNMPMonitor.Communication
         private readonly VersionCode _snmpVersion;
         public Get(string ip, int port, string communit, int version, int timeOut, int tries)
         {
-            this._ip = ip;
+            this._ip = System.Text.RegularExpressions.Regex.Replace(ip, "0*([0-9]+)", "${1}");
             this._port = port;
             this._communit = communit;
             this._tries = tries;

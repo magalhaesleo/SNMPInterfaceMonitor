@@ -404,7 +404,6 @@
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
             series2.ChartArea = "chtAreaUtilizationInterface";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series2.Enabled = false;
             series2.Legend = "Legend1";
             series2.LegendText = "Saida de Dados";
             series2.Name = "GraphInterfaceOut";
@@ -466,7 +465,7 @@
             this.maskedIP.Name = "maskedIP";
             this.maskedIP.Size = new System.Drawing.Size(88, 20);
             this.maskedIP.TabIndex = 1;
-            this.maskedIP.Text = "127000000001";
+            this.maskedIP.Text = "172031249038";
             // 
             // Principal
             // 
@@ -506,6 +505,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Principal";
             this.ShowIcon = false;
