@@ -26,7 +26,32 @@ namespace SNMPMonitor.Domain
         public int IfOutErrors { get; set; }
         public int DiscardIn { get; set; }
         public int DiscardOut { get; set; }
-        public string Speed { get; set; }
+        public int Speed { get; set; }
+        private int _oldIfInOctets = 0;
+        private int _oldIfOutOctets = 0;
+        DateTime _oldTime = DateTime.Now;
+        DateTime _currentTime;
+
+        public double Utilization
+        {
+            get
+            {
+                _currentTime = DateTime.Now;
+                long elapsedTicks = _currentTime.Ticks - _oldTime.Ticks;
+                TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+                _oldTime = _currentTime;
+                double totalBytes = IfInOctets - _oldIfInOctets;
+                if (totalBytes == 0)
+                    return 0;
+
+                double bytesPerSecond = (totalBytes * 8) * 100;
+                _oldIfInOctets = IfInOctets;
+                _oldIfOutOctets = IfOutOctets;
+                double SpeedPerSecond = elapsedSpan.Seconds * Speed;
+                double div = bytesPerSecond / SpeedPerSecond;
+                return div * 100;
+            }
+        }
         public int ErrorRateIn
         {
             get
@@ -60,7 +85,7 @@ namespace SNMPMonitor.Domain
                 return ret;
 
             }
-        }        
+        }
         public int DiscardRateOut
         {
             get

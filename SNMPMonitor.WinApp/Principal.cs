@@ -79,9 +79,8 @@ namespace SNMPMonitor.WinApp
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Tipo: " + _interface.Type);
             txtResumeInterface.AppendText(Environment.NewLine);
-            int Speed;
-            int.TryParse(_interface.Speed, out Speed);
-            txtResumeInterface.AppendText("Velocidade: " + (Speed > 0 ? (Speed / 1024) / 8 : 0) + "Mb/s");
+            int Speed = _interface.Speed;
+            txtResumeInterface.AppendText("Velocidade: " + ( Speed > 0 ? (Speed / 1024) / 8 : 0) + "Mb/s");
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("MAC: " + _interface.MAC);
             txtResumeInterface.AppendText(Environment.NewLine);
@@ -101,13 +100,15 @@ namespace SNMPMonitor.WinApp
                 if (chtInterface.Series[0].Points.Count > 4)
                 {
                     chtInterface.Series[0].Points.RemoveAt(0);
-                    chtInterface.Series[1].Points.RemoveAt(0);
+                    //chtInterface.Series[1].Points.RemoveAt(0);
                     chtInterface.Update();
                 }
 
                 string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
-                chtInterface.Series[0].Points.AddXY(hourNow, inter.IfInOctets);
-                chtInterface.Series[1].Points.AddXY(hourNow, inter.IfOutOctets);
+                double var = inter.Utilization;
+                int teste = (int)var;
+                chtInterface.Series[0].Points.AddXY(hourNow, teste.ToString());
+                //chtInterface.Series[1].Points.AddXY(hourNow, inter.IfOutOctets);
 
                 txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
                 txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
