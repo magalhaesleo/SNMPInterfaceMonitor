@@ -74,6 +74,10 @@ namespace SNMPMonitor.Services
 
             return int.Parse(index);
         }
+        public string GetTemperature(string oid)
+        {
+            return _get.GetResponse(oid);
+        }
 
     }
 }

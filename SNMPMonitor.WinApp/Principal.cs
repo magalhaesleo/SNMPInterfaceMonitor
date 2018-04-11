@@ -42,7 +42,10 @@ namespace SNMPMonitor.WinApp
                 txtResume.Text += "Contato: " + equip.Contact + "\r\n";
                 txtResume.Text += "Nome: " + equip.Name + "\r\n";
                 txtResume.Text += "Local: " + equip.Location + "\r\n";
-                txtResume.Text += "Tempo Ligado: " + equip.UpTime;
+                txtResume.Text += "Tempo Ligado: " + equip.UpTime + "\r\n";
+
+                if (cbTemperature.Checked)
+                    txtResume.Text += "Temeperatura: " + getData.GetTemperature(txtOIDTemperature.Text);
 
                 int index = getData.GetIndexOfInterfaces();
 
@@ -125,5 +128,14 @@ namespace SNMPMonitor.WinApp
             timerUpdateGraphInterface.Interval = (int)(numInterval.Value * 1000);
         }
 
+        private void cbTemperature_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbTemperature.Checked)
+                txtOIDTemperature.Enabled = true;
+            else
+                txtOIDTemperature.Enabled = false;
+
+
+        }
     }
 }
