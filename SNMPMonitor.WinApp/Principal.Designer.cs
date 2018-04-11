@@ -324,6 +324,11 @@
             0,
             0,
             0});
+            this.numRestransmitions.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numRestransmitions.Name = "numRestransmitions";
             this.numRestransmitions.ReadOnly = true;
             this.numRestransmitions.Size = new System.Drawing.Size(69, 20);
