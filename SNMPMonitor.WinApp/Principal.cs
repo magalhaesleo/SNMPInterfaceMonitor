@@ -45,7 +45,13 @@ namespace SNMPMonitor.WinApp
                 txtResume.Text += "Tempo Ligado: " + equip.UpTime + "\r\n";
 
                 if (cbTemperature.Checked)
-                    txtResume.Text += "Temeperatura: " + getData.GetTemperature(txtOIDTemperature.Text);
+                    txtResume.Text += "Temperatura: " + getData.GetTemperature(txtOIDTemperature.Text) + "º Celsius\r\n";
+
+                if (cbMemory.Checked)
+                    txtResume.Text += "Memória: " + getData.GetMemory(txtOIDMemory.Text) + "% \r\n";
+
+                if (cbCPU.Checked)
+                    txtResume.Text += "CPU: " + getData.GetCPUUsage(txtOIDCPU.Text) + "%";
 
                 int index = getData.GetIndexOfInterfaces();
 
@@ -136,6 +142,22 @@ namespace SNMPMonitor.WinApp
                 txtOIDTemperature.Enabled = false;
 
 
+        }
+
+        private void cbCPU_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCPU.Checked)
+                txtOIDCPU.Enabled = true;
+            else
+                txtOIDCPU.Enabled = false;
+        }
+
+        private void cbMemory_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbMemory.Checked)
+                txtOIDMemory.Enabled = true;
+            else
+                txtOIDMemory.Enabled = false;
         }
     }
 }

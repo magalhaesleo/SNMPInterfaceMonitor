@@ -70,6 +70,10 @@
             this.maskedIP = new System.Windows.Forms.MaskedTextBox();
             this.txtOIDTemperature = new System.Windows.Forms.TextBox();
             this.cbTemperature = new System.Windows.Forms.CheckBox();
+            this.cbMemory = new System.Windows.Forms.CheckBox();
+            this.txtOIDMemory = new System.Windows.Forms.TextBox();
+            this.cbCPU = new System.Windows.Forms.CheckBox();
+            this.txtOIDCPU = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRestransmitions)).BeginInit();
@@ -155,7 +159,7 @@
             this.txtResume.Multiline = true;
             this.txtResume.Name = "txtResume";
             this.txtResume.ReadOnly = true;
-            this.txtResume.Size = new System.Drawing.Size(544, 99);
+            this.txtResume.Size = new System.Drawing.Size(544, 140);
             this.txtResume.TabIndex = 13;
             // 
             // label8
@@ -180,7 +184,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 236);
+            this.label9.Location = new System.Drawing.Point(3, 277);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(54, 13);
             this.label9.TabIndex = 16;
@@ -190,7 +194,7 @@
             // 
             this.cmbInterfaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInterfaces.FormattingEnabled = true;
-            this.cmbInterfaces.Location = new System.Drawing.Point(6, 252);
+            this.cmbInterfaces.Location = new System.Drawing.Point(6, 293);
             this.cmbInterfaces.Name = "cmbInterfaces";
             this.cmbInterfaces.Size = new System.Drawing.Size(461, 21);
             this.cmbInterfaces.TabIndex = 17;
@@ -199,7 +203,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(472, 237);
+            this.label10.Location = new System.Drawing.Point(472, 278);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(48, 13);
             this.label10.TabIndex = 19;
@@ -207,7 +211,7 @@
             // 
             // txtResumeInterface
             // 
-            this.txtResumeInterface.Location = new System.Drawing.Point(6, 292);
+            this.txtResumeInterface.Location = new System.Drawing.Point(6, 333);
             this.txtResumeInterface.Multiline = true;
             this.txtResumeInterface.Name = "txtResumeInterface";
             this.txtResumeInterface.ReadOnly = true;
@@ -217,7 +221,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 276);
+            this.label11.Location = new System.Drawing.Point(3, 317);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(91, 13);
             this.label11.TabIndex = 21;
@@ -226,7 +230,7 @@
             // txtErrorRateIn
             // 
             this.txtErrorRateIn.Enabled = false;
-            this.txtErrorRateIn.Location = new System.Drawing.Point(98, 587);
+            this.txtErrorRateIn.Location = new System.Drawing.Point(98, 628);
             this.txtErrorRateIn.Name = "txtErrorRateIn";
             this.txtErrorRateIn.ReadOnly = true;
             this.txtErrorRateIn.Size = new System.Drawing.Size(35, 20);
@@ -235,7 +239,7 @@
             // txtErrorRateOut
             // 
             this.txtErrorRateOut.Enabled = false;
-            this.txtErrorRateOut.Location = new System.Drawing.Point(140, 587);
+            this.txtErrorRateOut.Location = new System.Drawing.Point(140, 628);
             this.txtErrorRateOut.Name = "txtErrorRateOut";
             this.txtErrorRateOut.ReadOnly = true;
             this.txtErrorRateOut.Size = new System.Drawing.Size(35, 20);
@@ -244,7 +248,7 @@
             // taxa
             // 
             this.taxa.AutoSize = true;
-            this.taxa.Location = new System.Drawing.Point(103, 558);
+            this.taxa.Location = new System.Drawing.Point(103, 599);
             this.taxa.Name = "taxa";
             this.taxa.Size = new System.Drawing.Size(70, 13);
             this.taxa.TabIndex = 23;
@@ -253,7 +257,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(323, 558);
+            this.label13.Location = new System.Drawing.Point(323, 599);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(93, 13);
             this.label13.TabIndex = 26;
@@ -262,7 +266,7 @@
             // txtDiscardOut
             // 
             this.txtDiscardOut.Enabled = false;
-            this.txtDiscardOut.Location = new System.Drawing.Point(372, 587);
+            this.txtDiscardOut.Location = new System.Drawing.Point(372, 628);
             this.txtDiscardOut.Name = "txtDiscardOut";
             this.txtDiscardOut.ReadOnly = true;
             this.txtDiscardOut.Size = new System.Drawing.Size(35, 20);
@@ -271,7 +275,7 @@
             // txtDiscardIn
             // 
             this.txtDiscardIn.Enabled = false;
-            this.txtDiscardIn.Location = new System.Drawing.Point(326, 587);
+            this.txtDiscardIn.Location = new System.Drawing.Point(326, 628);
             this.txtDiscardIn.Name = "txtDiscardIn";
             this.txtDiscardIn.ReadOnly = true;
             this.txtDiscardIn.Size = new System.Drawing.Size(35, 20);
@@ -343,7 +347,7 @@
             // 
             // numInterval
             // 
-            this.numInterval.Location = new System.Drawing.Point(475, 253);
+            this.numInterval.Location = new System.Drawing.Point(475, 294);
             this.numInterval.Maximum = new decimal(new int[] {
             60,
             0,
@@ -400,7 +404,7 @@
             this.chtInterface.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chtInterface.Legends.Add(legend1);
-            this.chtInterface.Location = new System.Drawing.Point(-1, 393);
+            this.chtInterface.Location = new System.Drawing.Point(4, 442);
             this.chtInterface.Name = "chtInterface";
             this.chtInterface.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "chtAreaUtilizationInterface";
@@ -432,7 +436,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(141, 571);
+            this.label12.Location = new System.Drawing.Point(141, 612);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(34, 13);
             this.label12.TabIndex = 28;
@@ -441,7 +445,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(91, 571);
+            this.label14.Location = new System.Drawing.Point(91, 612);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(44, 13);
             this.label14.TabIndex = 29;
@@ -450,7 +454,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(323, 571);
+            this.label15.Location = new System.Drawing.Point(323, 612);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(44, 13);
             this.label15.TabIndex = 30;
@@ -459,7 +463,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(373, 571);
+            this.label16.Location = new System.Drawing.Point(373, 612);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(34, 13);
             this.label16.TabIndex = 31;
@@ -479,8 +483,9 @@
             this.txtOIDTemperature.Enabled = false;
             this.txtOIDTemperature.Location = new System.Drawing.Point(6, 89);
             this.txtOIDTemperature.Name = "txtOIDTemperature";
-            this.txtOIDTemperature.Size = new System.Drawing.Size(112, 20);
+            this.txtOIDTemperature.Size = new System.Drawing.Size(169, 20);
             this.txtOIDTemperature.TabIndex = 32;
+            this.txtOIDTemperature.Text = "1.3.6.1.4.1.25506.2.6.1.1.1.1.12.8";
             // 
             // cbTemperature
             // 
@@ -493,11 +498,55 @@
             this.cbTemperature.UseVisualStyleBackColor = true;
             this.cbTemperature.CheckedChanged += new System.EventHandler(this.cbTemperature_CheckedChanged);
             // 
+            // cbMemory
+            // 
+            this.cbMemory.AutoSize = true;
+            this.cbMemory.Location = new System.Drawing.Point(192, 66);
+            this.cbMemory.Name = "cbMemory";
+            this.cbMemory.Size = new System.Drawing.Size(94, 17);
+            this.cbMemory.TabIndex = 35;
+            this.cbMemory.Text = "OID Memória?";
+            this.cbMemory.UseVisualStyleBackColor = true;
+            this.cbMemory.CheckedChanged += new System.EventHandler(this.cbMemory_CheckedChanged);
+            // 
+            // txtOIDMemory
+            // 
+            this.txtOIDMemory.Enabled = false;
+            this.txtOIDMemory.Location = new System.Drawing.Point(192, 89);
+            this.txtOIDMemory.Name = "txtOIDMemory";
+            this.txtOIDMemory.Size = new System.Drawing.Size(169, 20);
+            this.txtOIDMemory.TabIndex = 34;
+            this.txtOIDMemory.Text = "1.3.6.1.4.1.25506.2.6.1.1.1.1.8.8";
+            // 
+            // cbCPU
+            // 
+            this.cbCPU.AutoSize = true;
+            this.cbCPU.Location = new System.Drawing.Point(376, 66);
+            this.cbCPU.Name = "cbCPU";
+            this.cbCPU.Size = new System.Drawing.Size(76, 17);
+            this.cbCPU.TabIndex = 37;
+            this.cbCPU.Text = "OID CPU?";
+            this.cbCPU.UseVisualStyleBackColor = true;
+            this.cbCPU.CheckedChanged += new System.EventHandler(this.cbCPU_CheckedChanged);
+            // 
+            // txtOIDCPU
+            // 
+            this.txtOIDCPU.Enabled = false;
+            this.txtOIDCPU.Location = new System.Drawing.Point(376, 89);
+            this.txtOIDCPU.Name = "txtOIDCPU";
+            this.txtOIDCPU.Size = new System.Drawing.Size(174, 20);
+            this.txtOIDCPU.TabIndex = 36;
+            this.txtOIDCPU.Text = "1.3.6.1.4.1.25506.2.6.1.1.1.1.6.8";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 640);
+            this.ClientSize = new System.Drawing.Size(555, 656);
+            this.Controls.Add(this.cbCPU);
+            this.Controls.Add(this.txtOIDCPU);
+            this.Controls.Add(this.cbMemory);
+            this.Controls.Add(this.txtOIDMemory);
             this.Controls.Add(this.cbTemperature);
             this.Controls.Add(this.txtOIDTemperature);
             this.Controls.Add(this.maskedIP);
@@ -588,6 +637,10 @@
         private System.Windows.Forms.MaskedTextBox maskedIP;
         private System.Windows.Forms.TextBox txtOIDTemperature;
         private System.Windows.Forms.CheckBox cbTemperature;
+        private System.Windows.Forms.CheckBox cbMemory;
+        private System.Windows.Forms.TextBox txtOIDMemory;
+        private System.Windows.Forms.CheckBox cbCPU;
+        private System.Windows.Forms.TextBox txtOIDCPU;
     }
 }
 

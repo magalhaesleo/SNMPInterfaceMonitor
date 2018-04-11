@@ -79,5 +79,15 @@ namespace SNMPMonitor.Services
             return _get.GetResponse(oid);
         }
 
+        public string GetMemory(string oid)
+        {
+            return _get.GetResponse(oid);
+        }
+
+        public string GetCPUUsage(string oid)
+        {
+            return _get.GetResponse(oid);
+        }
+
     }
 }
