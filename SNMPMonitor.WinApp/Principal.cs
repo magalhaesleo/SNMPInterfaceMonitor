@@ -9,7 +9,7 @@ namespace SNMPMonitor.WinApp
     {
         private GetData getData;
         private Interface _interface;
-
+        private Equipment _equip;
         public Principal()
         {
             InitializeComponent();
@@ -36,22 +36,10 @@ namespace SNMPMonitor.WinApp
                 getData = new GetData(maskedIP.Text.Replace(",", "."), (int)numPort.Value, txtCommunit.Text, (int)numVersion.Value,
                         (int)numTimeOut.Value, (int)numRestransmitions.Value);
 
-                Equipment equip = getData.GetResumeOfEquipment();
-                txtResume.Text = "Descrição: " + equip.Description + "\r\n";
+                _equip = getData.GetResumeOfEquipment();
 
-                txtResume.Text += "Contato: " + equip.Contact + "\r\n";
-                txtResume.Text += "Nome: " + equip.Name + "\r\n";
-                txtResume.Text += "Local: " + equip.Location + "\r\n";
-                txtResume.Text += "Tempo Ligado: " + equip.UpTime + "\r\n";
 
-                if (cbTemperature.Checked)
-                    txtResume.Text += "Temperatura: " + getData.GetTemperature(txtOIDTemperature.Text) + "º Celsius\r\n";
-
-                if (cbMemory.Checked)
-                    txtResume.Text += "Memória: " + getData.GetMemory(txtOIDMemory.Text) + "% \r\n";
-
-                if (cbCPU.Checked)
-                    txtResume.Text += "CPU: " + getData.GetCPUUsage(txtOIDCPU.Text) + "%";
+                timerMemory.Enabled = true;
 
                 int index = getData.GetIndexOfInterfaces();
 
@@ -81,11 +69,11 @@ namespace SNMPMonitor.WinApp
 
         private void cmbInterfaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-            
+
+
             _interface = (Interface)cmbInterfaces.SelectedItem;
 
-           
+
             txtResumeInterface.Text = "Indice: " + _interface.Index;
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Descrição: " + _interface.Description);
@@ -93,7 +81,7 @@ namespace SNMPMonitor.WinApp
             txtResumeInterface.AppendText("Tipo: " + _interface.Type);
             txtResumeInterface.AppendText(Environment.NewLine);
             int Speed = _interface.Speed;
-            txtResumeInterface.AppendText("Velocidade: " + ( Speed > 0 ? (Speed / 1024) / 8 : 0) + "Mb/s");
+            txtResumeInterface.AppendText("Velocidade: " + (Speed > 0 ? (Speed / 1024) / 8 : 0) + "Mb/s");
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("MAC: " + _interface.MAC);
             txtResumeInterface.AppendText(Environment.NewLine);
@@ -125,8 +113,8 @@ namespace SNMPMonitor.WinApp
                 }
 
                 string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
-                chtInterface.Series[0].Points.AddXY(hourNow, System.Math.Round(inter.InputUtilization,2));
-                chtInterface.Series[1].Points.AddXY(hourNow, System.Math.Round(inter.OutputUtilization,2));
+                chtInterface.Series[0].Points.AddXY(hourNow, System.Math.Round(inter.InputUtilization, 2));
+                chtInterface.Series[1].Points.AddXY(hourNow, System.Math.Round(inter.OutputUtilization, 2));
 
                 txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
                 txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
@@ -135,7 +123,9 @@ namespace SNMPMonitor.WinApp
             }
             catch (Exception ex)
             {
+                timerUpdateGraphInterface.Stop();
                 MessageBox.Show(ex.Message, "Atenção");
+                timerUpdateGraphInterface.Start();
             }
         }
 
@@ -168,6 +158,36 @@ namespace SNMPMonitor.WinApp
                 txtOIDMemory.Enabled = true;
             else
                 txtOIDMemory.Enabled = false;
+        }
+
+
+        private void timerMemory_Tick(object sender, EventArgs e)
+        {
+            txtResume.Text = "Descrição: " + _equip.Description + "\r\n";
+
+            txtResume.Text += "Contato: " + _equip.Contact + "\r\n";
+            txtResume.Text += "Nome: " + _equip.Name + "\r\n";
+            txtResume.Text += "Local: " + _equip.Location + "\r\n";
+            txtResume.Text += "Tempo Ligado: " + _equip.UpTime + "\r\n";
+
+            try
+            {
+                if (cbTemperature.Checked)
+                    txtResume.Text += "Temperatura: " + getData.GetTemperature(txtOIDTemperature.Text) + "º Celsius\r\n";
+
+                if (cbMemory.Checked)
+                    txtResume.Text += "Memória: " + getData.GetMemory(txtOIDMemory.Text) + "% \r\n";
+
+                if (cbCPU.Checked)
+                    txtResume.Text += "CPU: " + getData.GetCPUUsage(txtOIDCPU.Text) + "%";
+            }
+            catch (Exception ex)
+            {
+                timerMemory.Stop();
+                MessageBox.Show(ex.Message, "Atenção");
+                timerMemory.Start();
+            }
+
         }
     }
 }
