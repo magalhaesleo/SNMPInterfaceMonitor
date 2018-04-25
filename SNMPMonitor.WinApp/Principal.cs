@@ -81,8 +81,11 @@ namespace SNMPMonitor.WinApp
 
         private void cmbInterfaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            timerUpdateGraphInterface.Enabled = true;
+           
+            
             _interface = (Interface)cmbInterfaces.SelectedItem;
+
+           
             txtResumeInterface.Text = "Indice: " + _interface.Index;
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Descrição: " + _interface.Description);
@@ -99,6 +102,13 @@ namespace SNMPMonitor.WinApp
             txtResumeInterface.AppendText("Status Operacional: " + _interface.OperationalStatus);
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Status da Interface: " + _interface.Status);
+
+            if (_interface.Status != "Operational")
+            {
+                timerUpdateGraphInterface.Enabled = false;
+                return;
+            }
+            timerUpdateGraphInterface.Enabled = true;
 
         }
         private void timerUpdateGraphInterface_Tick(object sender, EventArgs e)
