@@ -39,7 +39,7 @@ namespace SNMPMonitor.Communication
 
             while (retries < _tries)
             {
-                IList<Variable> result = Messenger.Get(_snmpVersion, new IPEndPoint(IPAddress.Parse(_ip), _port),
+                 IList<Variable> result = Messenger.Get(_snmpVersion, new IPEndPoint(IPAddress.Parse(_ip), _port),
                  new OctetString(_communit),
                  new List<Variable> { new Variable(new ObjectIdentifier(oid)) },
                  _timeOut);

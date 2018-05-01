@@ -45,7 +45,7 @@ namespace SNMPMonitor.WinApp
 
                 cmbInterfaces.Items.Clear();
 
-                for (int i = 1; i <= index; i++)
+                for (uint i = 1; i <= index; i++)
                 {
                     Interface inter = getData.GetResumeOfInterface(i);
                     if (inter.Description.Length > 0)
@@ -80,8 +80,9 @@ namespace SNMPMonitor.WinApp
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("Tipo: " + _interface.Type);
             txtResumeInterface.AppendText(Environment.NewLine);
-            int Speed = _interface.Speed;
-            txtResumeInterface.AppendText("Velocidade: " + (Speed > 0 ? (Speed / 1024) / 8 : 0) + "Mb/s");
+            Int64 Speed = _interface.Speed;
+            //txtResumeInterface.AppendText("Velocidade: " + (Speed > 0 ? (Speed / 1024f) / 1024f : 0) + "Mb/s");
+            txtResumeInterface.AppendText("Velocidade: " + (Speed > 0 ? Speed : 0) + " Bytes");
             txtResumeInterface.AppendText(Environment.NewLine);
             txtResumeInterface.AppendText("MAC: " + _interface.MAC);
             txtResumeInterface.AppendText(Environment.NewLine);
@@ -103,23 +104,21 @@ namespace SNMPMonitor.WinApp
         {
             try
             {
-                Interface inter = getData.GetUsageDetailsOfInterface(_interface);
+                _interface = getData.GetUsageDetailsOfInterface(_interface);
 
                 if (chtInterface.Series[0].Points.Count > 4)
                 {
                     chtInterface.Series[0].Points.RemoveAt(0);
-                    chtInterface.Series[1].Points.RemoveAt(0);
                     chtInterface.Update();
                 }
 
                 string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
-                chtInterface.Series[0].Points.AddXY(hourNow, System.Math.Round(inter.InputUtilization, 2));
-                chtInterface.Series[1].Points.AddXY(hourNow, System.Math.Round(inter.OutputUtilization, 2));
+                chtInterface.Series[0].Points.AddXY(hourNow, System.Math.Round(_interface.Utilization, 2));
 
-                txtErrorRateIn.Text = inter.ErrorRateIn.ToString() + "%";
-                txtErrorRateOut.Text = inter.ErrorRateOut.ToString() + "%";
-                txtDiscardIn.Text = inter.DiscardRateIn.ToString() + "%";
-                txtDiscardOut.Text = inter.DiscardRateOut.ToString() + "%";
+                txtErrorRateIn.Text = _interface.ErrorRateIn.ToString() + "%";
+                txtErrorRateOut.Text = _interface.ErrorRateOut.ToString() + "%";
+                txtDiscardIn.Text = _interface.DiscardRateIn.ToString() + "%";
+                txtDiscardOut.Text = _interface.DiscardRateOut.ToString() + "%";
             }
             catch (Exception ex)
             {
@@ -168,6 +167,7 @@ namespace SNMPMonitor.WinApp
             txtResume.Text += "Contato: " + _equip.Contact + "\r\n";
             txtResume.Text += "Nome: " + _equip.Name + "\r\n";
             txtResume.Text += "Local: " + _equip.Location + "\r\n";
+            _equip.UpTime = getData.GetTimeUp();
             txtResume.Text += "Tempo Ligado: " + _equip.UpTime + "\r\n";
 
             try

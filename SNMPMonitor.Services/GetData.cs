@@ -23,7 +23,7 @@ namespace SNMPMonitor.Services
                 equipment.Contact = _get.GetResponse("1.3.6.1.2.1.1.4.0");
                 equipment.Name = _get.GetResponse("1.3.6.1.2.1.1.5.0");
                 equipment.Location = _get.GetResponse("1.3.6.1.2.1.1.6.0");
-                equipment.UpTime = _get.GetResponse("1.3.6.1.2.1.1.3.0");
+                
             }
             catch (Exception)
             {
@@ -33,17 +33,18 @@ namespace SNMPMonitor.Services
             return equipment;
         }
 
-        public Interface GetResumeOfInterface(int index)
+        public Interface GetResumeOfInterface(uint index)
         {
+
             //capturar as informações do dispositivo
             Interface inter = new Interface();
-            inter.Index = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.1." + index));
+            inter.Index = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.1." + index));
             inter.Description = _get.GetResponse("1.3.6.1.2.1.2.2.1.2." + index);
             inter.Type = _get.GetResponse("1.3.6.1.2.1.2.2.1.3." + index);
-            inter.Speed = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.5." + index));
+            inter.Speed = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.5." + index));
             inter.MAC = _get.GetResponse("1.3.6.1.2.1.2.2.1.6." + index);
-            inter.AdministrativeStatus = (OperationalStatus)int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.7." + index));
-            inter.OperationalStatus = (OperationalStatus)int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.8." + index));
+            inter.AdministrativeStatus = (OperationalStatus)uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.7." + index));
+            inter.OperationalStatus = (OperationalStatus)uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.8." + index));
 
             return inter;
         }
@@ -51,20 +52,20 @@ namespace SNMPMonitor.Services
         public Interface GetUsageDetailsOfInterface(Interface Interface)
         {
             //Capturar a quantidade de pacotes de entrada
-            Interface.IfInUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.11." + Interface.Index));
-            Interface.IfInNUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.12." + Interface.Index));
+            Interface.IfInUcastPkts = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.11." + Interface.Index));
+            Interface.IfInNUcastPkts = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.12." + Interface.Index));
 
             //Capturar a quantidade de pacotes de saida            
-            Interface.IfOutUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.17." + Interface.Index));
-            Interface.IfOutNUcastPkts = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.18." + Interface.Index));
-            Interface.IfInErrors = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.14." + Interface.Index));
-            Interface.IfOutErrors = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.20." + Interface.Index));
-            Interface.DiscardIn = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.13." + Interface.Index));
-            Interface.DiscardOut = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.19." + Interface.Index));
+            Interface.IfOutUcastPkts = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.17." + Interface.Index));
+            Interface.IfOutNUcastPkts = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.18." + Interface.Index));
+            Interface.IfInErrors = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.14." + Interface.Index));
+            Interface.IfOutErrors = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.20." + Interface.Index));
+            Interface.DiscardIn = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.13." + Interface.Index));
+            Interface.DiscardOut = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.19." + Interface.Index));
 
             //Capturar os dados de uso da interface
-            Interface.IfInOctets = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.10." + Interface.Index));
-            Interface.IfOutOctets = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.16." + Interface.Index));
+            Interface.IfInOctets = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.10." + Interface.Index));
+            Interface.IfOutOctets = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.16." + Interface.Index));
 
             return Interface;
         }
@@ -73,6 +74,10 @@ namespace SNMPMonitor.Services
             string index = _get.GetResponse("1.3.6.1.2.1.2.1.0");
 
             return int.Parse(index);
+        }
+        public string GetTimeUp()
+        {
+            return _get.GetResponse("1.3.6.1.2.1.1.3.0");
         }
         public string GetTemperature(string oid)
         {

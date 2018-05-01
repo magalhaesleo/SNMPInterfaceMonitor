@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -397,37 +396,30 @@
             // 
             this.chtInterface.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.chtInterface.BorderSkin.BorderColor = System.Drawing.Color.White;
-            chartArea3.CursorX.IsUserEnabled = true;
-            chartArea3.CursorX.IsUserSelectionEnabled = true;
-            chartArea3.CursorY.IsUserEnabled = true;
-            chartArea3.CursorY.IsUserSelectionEnabled = true;
-            chartArea3.Name = "chtAreaUtilizationInterface";
-            this.chtInterface.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chtInterface.Legends.Add(legend3);
+            chartArea1.CursorX.IsUserEnabled = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.CursorY.IsUserEnabled = true;
+            chartArea1.CursorY.IsUserSelectionEnabled = true;
+            chartArea1.Name = "chtAreaUtilizationInterface";
+            this.chtInterface.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtInterface.Legends.Add(legend1);
             this.chtInterface.Location = new System.Drawing.Point(4, 442);
             this.chtInterface.Name = "chtInterface";
             this.chtInterface.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series5.ChartArea = "chtAreaUtilizationInterface";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series5.Legend = "Legend1";
-            series5.LegendText = "Entrada de Dados";
-            series5.Name = "GraphInterfaceIn";
-            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            series6.ChartArea = "chtAreaUtilizationInterface";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series6.Legend = "Legend1";
-            series6.LegendText = "Saida de Dados";
-            series6.Name = "GraphInterfaceOut";
-            series6.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            this.chtInterface.Series.Add(series5);
-            this.chtInterface.Series.Add(series6);
+            series1.ChartArea = "chtAreaUtilizationInterface";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.Legend = "Legend1";
+            series1.LegendText = "Taxa de Utilização";
+            series1.Name = "GraphInterface";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            this.chtInterface.Series.Add(series1);
             this.chtInterface.Size = new System.Drawing.Size(544, 150);
             this.chtInterface.TabIndex = 27;
             this.chtInterface.Text = "chart1";
-            title3.Name = "Title1";
-            title3.Text = "Taxa de Utilização";
-            this.chtInterface.Titles.Add(title3);
+            title1.Name = "Title1";
+            title1.Text = "Taxa de Utilização";
+            this.chtInterface.Titles.Add(title1);
             // 
             // timerUpdateGraphInterface
             // 
@@ -477,7 +469,7 @@
             this.maskedIP.Name = "maskedIP";
             this.maskedIP.Size = new System.Drawing.Size(88, 20);
             this.maskedIP.TabIndex = 1;
-            this.maskedIP.Text = "000000000000";
+            this.maskedIP.Text = "127000000001";
             // 
             // txtOIDTemperature
             // 
