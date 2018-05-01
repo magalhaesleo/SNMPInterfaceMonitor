@@ -363,7 +363,7 @@
             this.numInterval.Size = new System.Drawing.Size(75, 20);
             this.numInterval.TabIndex = 18;
             this.numInterval.Value = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
@@ -423,7 +423,7 @@
             // 
             // timerUpdateGraphInterface
             // 
-            this.timerUpdateGraphInterface.Interval = 2000;
+            this.timerUpdateGraphInterface.Interval = 1000;
             this.timerUpdateGraphInterface.Tick += new System.EventHandler(this.timerUpdateGraphInterface_Tick);
             // 
             // label12

@@ -13,8 +13,8 @@ namespace SNMPMonitor.Domain
         public string Description { get; set; }
         private uint _type;
         public string MAC { get; set; }
-        public uint IfInOctets { get; set; }
-        public uint IfOutOctets { get; set; }
+        public int IfInOctets { get; set; }
+        public int IfOutOctets { get; set; }
         public OperationalStatus AdministrativeStatus { get; set; }
         private uint operationalStatus { get; set; }
         public OperationalStatus OperationalStatus { get; set; }
@@ -28,18 +28,25 @@ namespace SNMPMonitor.Domain
         public uint DiscardOut { get; set; }
         public uint Speed { get; set; }
         private DateTime _oldTime = DateTime.Now;
-        public uint _oldIfInOctets = 0;
-        public uint _oldIfOutOctets = 0;
+        public int _oldIfInOctets;
+        public int _oldIfOutOctets;
 
         public decimal Utilization
         {
             get
             {
+                if (_oldIfInOctets == 0 && _oldIfOutOctets == 0)
+                {
+                    _oldIfInOctets = IfInOctets;
+                    _oldIfOutOctets = IfOutOctets;
+                }
                 //Calculo do tempo gasto
                 DateTime currentTime = DateTime.Now;
                 TimeSpan elapsedSpan = currentTime.Subtract(_oldTime);
                 _oldTime = currentTime;
-                uint totalBytes = (IfInOctets - _oldIfInOctets) + (IfOutOctets - _oldIfOutOctets);
+                int bytesIn = IfInOctets - _oldIfInOctets;
+                int bytesOut = IfOutOctets - _oldIfOutOctets;
+                int totalBytes = bytesIn + bytesOut;
 
                 _oldIfInOctets = IfInOctets;
                 _oldIfOutOctets = IfOutOctets;
@@ -48,11 +55,16 @@ namespace SNMPMonitor.Domain
                     return 0;
 
                 //long bytesPerSecond = (totalBytes * 8)* 100;
-                decimal bytesPerSecond = totalBytes / elapsedSpan.Seconds;
-                //decimal bitsPerSecond = bytesPerSecond * 8;
-                decimal rateUtilization = bytesPerSecond / Speed;
+                int seconds = elapsedSpan.Seconds;
+                if (seconds == 0)
+                    seconds = 1;
 
-                return rateUtilization;
+                decimal bitsPerSecond = totalBytes * 8;
+                decimal usage = bitsPerSecond / seconds;
+                
+                decimal rateUtilization = usage / Speed;
+
+                return rateUtilization*100;
             }
         }
 

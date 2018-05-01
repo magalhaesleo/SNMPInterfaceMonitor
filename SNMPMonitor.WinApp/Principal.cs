@@ -94,7 +94,7 @@ namespace SNMPMonitor.WinApp
 
             if (_interface.Status != "Operational")
             {
-                timerUpdateGraphInterface.Enabled = false;
+                timerUpdateGraphInterface.Enabled = true;
                 return;
             }
             timerUpdateGraphInterface.Enabled = true;

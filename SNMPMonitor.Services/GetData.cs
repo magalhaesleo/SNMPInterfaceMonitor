@@ -64,8 +64,8 @@ namespace SNMPMonitor.Services
             Interface.DiscardOut = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.19." + Interface.Index));
 
             //Capturar os dados de uso da interface
-            Interface.IfInOctets = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.10." + Interface.Index));
-            Interface.IfOutOctets = uint.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.16." + Interface.Index));
+            Interface.IfInOctets = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.10." + Interface.Index));
+            Interface.IfOutOctets = int.Parse(_get.GetResponse("1.3.6.1.2.1.2.2.1.16." + Interface.Index));
 
             return Interface;
         }
