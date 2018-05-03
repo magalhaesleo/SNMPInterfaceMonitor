@@ -13,8 +13,8 @@ namespace SNMPMonitor.Domain
         public string Description { get; set; }
         private uint _type;
         public string MAC { get; set; }
-        public int IfInOctets { get; set; }
-        public int IfOutOctets { get; set; }
+        public uint IfInOctets { get; set; }
+        public uint IfOutOctets { get; set; }
         public OperationalStatus AdministrativeStatus { get; set; }
         private uint operationalStatus { get; set; }
         public OperationalStatus OperationalStatus { get; set; }
@@ -28,8 +28,8 @@ namespace SNMPMonitor.Domain
         public uint DiscardOut { get; set; }
         public uint Speed { get; set; }
         private DateTime _oldTime = DateTime.Now;
-        public int _oldIfInOctets;
-        public int _oldIfOutOctets;
+        public uint _oldIfInOctets;
+        public uint _oldIfOutOctets;
 
         public decimal Utilization
         {
@@ -44,9 +44,9 @@ namespace SNMPMonitor.Domain
                 DateTime currentTime = DateTime.Now;
                 TimeSpan elapsedSpan = currentTime.Subtract(_oldTime);
                 _oldTime = currentTime;
-                int bytesIn = IfInOctets - _oldIfInOctets;
-                int bytesOut = IfOutOctets - _oldIfOutOctets;
-                int totalBytes = bytesIn + bytesOut;
+                uint bytesIn = IfInOctets - _oldIfInOctets;
+                uint bytesOut = IfOutOctets - _oldIfOutOctets;
+                uint totalBytes = bytesIn + bytesOut;
 
                 _oldIfInOctets = IfInOctets;
                 _oldIfOutOctets = IfOutOctets;
@@ -58,11 +58,10 @@ namespace SNMPMonitor.Domain
                 int seconds = elapsedSpan.Seconds;
                 if (seconds == 0)
                     seconds = 1;
-
-                decimal bitsPerSecond = totalBytes * 8;
-                decimal usage = bitsPerSecond / seconds;
+                decimal bytespersecond = totalBytes / seconds;
+                decimal bitsPerSecond = bytespersecond * 8;
                 
-                decimal rateUtilization = usage / Speed;
+                decimal rateUtilization = bitsPerSecond / Speed;
 
                 return rateUtilization*100;
             }

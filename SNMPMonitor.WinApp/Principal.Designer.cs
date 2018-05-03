@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -74,6 +74,8 @@
             this.cbCPU = new System.Windows.Forms.CheckBox();
             this.txtOIDCPU = new System.Windows.Forms.TextBox();
             this.timerMemory = new System.Windows.Forms.Timer(this.components);
+            this.txtporcentagem = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRestransmitions)).BeginInit();
@@ -124,7 +126,7 @@
             this.txtCommunit.Name = "txtCommunit";
             this.txtCommunit.Size = new System.Drawing.Size(112, 20);
             this.txtCommunit.TabIndex = 3;
-            this.txtCommunit.Text = "public";
+            this.txtCommunit.Text = "abcBolinhas";
             // 
             // label5
             // 
@@ -396,30 +398,30 @@
             // 
             this.chtInterface.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.chtInterface.BorderSkin.BorderColor = System.Drawing.Color.White;
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.CursorY.IsUserEnabled = true;
-            chartArea1.CursorY.IsUserSelectionEnabled = true;
-            chartArea1.Name = "chtAreaUtilizationInterface";
-            this.chtInterface.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtInterface.Legends.Add(legend1);
+            chartArea2.CursorX.IsUserEnabled = true;
+            chartArea2.CursorX.IsUserSelectionEnabled = true;
+            chartArea2.CursorY.IsUserEnabled = true;
+            chartArea2.CursorY.IsUserSelectionEnabled = true;
+            chartArea2.Name = "chtAreaUtilizationInterface";
+            this.chtInterface.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtInterface.Legends.Add(legend2);
             this.chtInterface.Location = new System.Drawing.Point(4, 442);
             this.chtInterface.Name = "chtInterface";
             this.chtInterface.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.ChartArea = "chtAreaUtilizationInterface";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.Legend = "Legend1";
-            series1.LegendText = "Taxa de Utilização";
-            series1.Name = "GraphInterface";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            this.chtInterface.Series.Add(series1);
+            series2.ChartArea = "chtAreaUtilizationInterface";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series2.Legend = "Legend1";
+            series2.LegendText = "Taxa de Utilização";
+            series2.Name = "GraphInterface";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            this.chtInterface.Series.Add(series2);
             this.chtInterface.Size = new System.Drawing.Size(544, 150);
             this.chtInterface.TabIndex = 27;
             this.chtInterface.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Taxa de Utilização";
-            this.chtInterface.Titles.Add(title1);
+            title2.Name = "Title1";
+            title2.Text = "Taxa de Utilização";
+            this.chtInterface.Titles.Add(title2);
             // 
             // timerUpdateGraphInterface
             // 
@@ -469,7 +471,7 @@
             this.maskedIP.Name = "maskedIP";
             this.maskedIP.Size = new System.Drawing.Size(88, 20);
             this.maskedIP.TabIndex = 1;
-            this.maskedIP.Text = "127000000001";
+            this.maskedIP.Text = "172016000201";
             // 
             // txtOIDTemperature
             // 
@@ -536,11 +538,31 @@
             this.timerMemory.Interval = 2500;
             this.timerMemory.Tick += new System.EventHandler(this.timerMemory_Tick);
             // 
+            // txtporcentagem
+            // 
+            this.txtporcentagem.Enabled = false;
+            this.txtporcentagem.Location = new System.Drawing.Point(396, 508);
+            this.txtporcentagem.Name = "txtporcentagem";
+            this.txtporcentagem.ReadOnly = true;
+            this.txtporcentagem.Size = new System.Drawing.Size(56, 20);
+            this.txtporcentagem.TabIndex = 38;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(393, 492);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 13);
+            this.label17.TabIndex = 39;
+            this.label17.Text = "Porcentagem";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 656);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.txtporcentagem);
             this.Controls.Add(this.cbCPU);
             this.Controls.Add(this.txtOIDCPU);
             this.Controls.Add(this.cbMemory);
@@ -640,6 +662,8 @@
         private System.Windows.Forms.CheckBox cbCPU;
         private System.Windows.Forms.TextBox txtOIDCPU;
         private System.Windows.Forms.Timer timerMemory;
+        private System.Windows.Forms.TextBox txtporcentagem;
+        private System.Windows.Forms.Label label17;
     }
 }
 

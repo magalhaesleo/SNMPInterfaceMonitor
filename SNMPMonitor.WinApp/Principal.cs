@@ -113,8 +113,9 @@ namespace SNMPMonitor.WinApp
                 }
 
                 string hourNow = DateTime.Now.ToShortTimeString() + ":" + DateTime.Now.Second.ToString();
-                chtInterface.Series[0].Points.AddXY(hourNow, System.Math.Round(_interface.Utilization, 2));
-
+                decimal porcentagem = System.Math.Round(_interface.Utilization, 2) / 2;
+                chtInterface.Series[0].Points.AddXY(hourNow, porcentagem);
+                txtporcentagem.Text = porcentagem.ToString();
                 txtErrorRateIn.Text = _interface.ErrorRateIn.ToString() + "%";
                 txtErrorRateOut.Text = _interface.ErrorRateOut.ToString() + "%";
                 txtDiscardIn.Text = _interface.DiscardRateIn.ToString() + "%";
